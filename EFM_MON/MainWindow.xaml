@@ -1,0 +1,39 @@
+﻿<Window x:Class="EFM_MON.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        xmlns:local="clr-namespace:EFM_MON"
+        mc:Ignorable="d"
+        Title="통합서식지 운영자 모니터링" Height="1000" Width="1280">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+             Background="Gray">
+            <DockPanel>
+                <Button x:Name="btnDevTest"  DockPanel.Dock="Left" Margin="10,0,10,0"
+                      Content="서식지(개발기)"
+                      Click="btnDevTest_Click"  Height="30" Width="110"  />
+                <Button x:Name="btnPrdTest" DockPanel.Dock="Left" 
+                     Content="서식지(운영기)"
+                     Click="btnPrdTest_Click"   Height="30" Width="110" HorizontalAlignment="Left"/>
+            </DockPanel>
+
+        </Grid>
+         <Grid Grid.Row="1">
+            <Frame Name="frame"
+             Grid.Row="1"
+             NavigationUIVisibility="Hidden"
+             Source="view/PrdPage.xaml">
+            </Frame>
+
+        </Grid>
+ 
+
+    </Grid>
+</Window>
