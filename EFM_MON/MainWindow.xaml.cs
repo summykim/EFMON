@@ -27,9 +27,18 @@ namespace EFM_MON
         private string ip="";
         public MainWindow()
         {
+            Login login = new Login();
+            login.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            login.ShowDialog();
+
             InitializeComponent();
-            ip=CommonUtil.getLocalIpAddress();
+
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            ip =CommonUtil.getLocalIpAddress();
             this.Title = "통합서식지 운영자 모니터링[서식지(운영기)][" + ip + "]";
+
+
         }
 
         private void btnDevTest_Click(object sender, RoutedEventArgs e)
