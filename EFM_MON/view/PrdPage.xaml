@@ -9,8 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="통합서식지(운영기)">
     <DockPanel>
-        <wv2:WebView2 Name="webView"
-                  Source="https://e-form.sktelecom.com:8010/login/AdminLogin.do"
-   />
+        <wv2:WebView2 Name="webView" 
+                Source="https://e-form.sktelecom.com:8010"  />
     </DockPanel>
 </Page>

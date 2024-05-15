@@ -1,4 +1,5 @@
 ﻿using EFM_MON.classes;
+using Microsoft.Web.WebView2.Core;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -26,12 +27,32 @@ namespace EFM_MON.view
         {
             InitializeComponent();
 
+            // get notified when page has loaded
+            webView.NavigationCompleted += WebView_NavigationCompleted;
+
+            // force to async initialization
+            InitializeAsync();
+
+        }
+        async void InitializeAsync()
+        {
+
             string prdUrl = ConfigurationManager.AppSettings.Get("prdUrl");
             string ip = CommonUtil.getLocalIpAddress();
             Uri prdURI = new Uri(prdUrl + "?ipAddr=" + ip);
             webView.Source = prdURI;
+            // You can then navigate the file from disk with the domain
+            webView.Source = prdURI;
 
-
+      
+        }
+        private async void WebView_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        {
+            // Now it's safe to interact with the DOM
+            var id = "UK189";
+            var pwd = "ops04988!@";
+            await webView.ExecuteScriptAsync($"document.getElementById('loginIdIn').value = '{id}';");
+            await webView.ExecuteScriptAsync($"document.getElementById('pwdIn').value = '{pwd}';");
         }
     }
 }

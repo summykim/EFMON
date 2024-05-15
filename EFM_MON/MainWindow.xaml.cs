@@ -27,10 +27,6 @@ namespace EFM_MON
         private string ip="";
         public MainWindow()
         {
-            Login login = new Login();
-            login.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            login.ShowDialog();
-
             InitializeComponent();
 
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
