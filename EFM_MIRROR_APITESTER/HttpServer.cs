@@ -74,11 +74,7 @@ namespace EFMSIGN
                         else if (request.Url.AbsolutePath.Equals("/sign_cancel"))
                         {
                             formMain.form.cancel_param.Text = s;
-                        }
-                        else if (request.Url.AbsolutePath.Equals("/sign_state"))
-                        {
-                            formMain.form.state_param.Text = s;
-                        }
+                        }                       
                         else if (request.Url.AbsolutePath.Equals("/sign_result"))
                         {
                             formMain.form.result_param.Text = s;
@@ -121,10 +117,6 @@ namespace EFMSIGN
                     else if (request.Url.AbsolutePath.Equals("/sign_cancel"))
                     {
                         resultString = formMain.form.cancel_result.Text;
-                    }
-                    else if (request.Url.AbsolutePath.Equals("/sign_state"))
-                    {
-                        resultString = formMain.form.state_result.Text;
                     }
                     else if (request.Url.AbsolutePath.Equals("/sign_result"))
                     {

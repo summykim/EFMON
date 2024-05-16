@@ -40,11 +40,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cancel_param = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.state_result = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.state_param = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.btnn5GsignOk = new System.Windows.Forms.Button();
             this.btnnsignOk = new System.Windows.Forms.Button();
@@ -71,7 +66,6 @@
             this.apiTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,9 +81,8 @@
             // apiTabs
             // 
             this.apiTabs.Controls.Add(this.tabPage1);
-            this.apiTabs.Controls.Add(this.tabPage2);
-            this.apiTabs.Controls.Add(this.tabPage3);
             this.apiTabs.Controls.Add(this.tabPage4);
+            this.apiTabs.Controls.Add(this.tabPage2);
             this.apiTabs.Location = new System.Drawing.Point(28, 26);
             this.apiTabs.Name = "apiTabs";
             this.apiTabs.SelectedIndex = 0;
@@ -201,57 +194,6 @@
             this.label4.Size = new System.Drawing.Size(81, 12);
             this.label4.TabIndex = 4;
             this.label4.Text = "요청파라미터:";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.state_result);
-            this.tabPage3.Controls.Add(this.label5);
-            this.tabPage3.Controls.Add(this.state_param);
-            this.tabPage3.Controls.Add(this.label6);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1058, 455);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "서명상태조회";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // state_result
-            // 
-            this.state_result.Location = new System.Drawing.Point(136, 207);
-            this.state_result.Multiline = true;
-            this.state_result.Name = "state_result";
-            this.state_result.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.state_result.Size = new System.Drawing.Size(637, 97);
-            this.state_result.TabIndex = 11;
-            this.state_result.Text = "{\r\n \"resultCode\":\"success\",\r\n  \"resultMsg\":\"status check ok\"\r\n  \"result\":{\r\n     " +
-    "   \"10001\":true,\r\n        \"10002\":true,\r\n        \"10003\":true\r\n    }\r\n}";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(60, 254);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 12);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "리턴결과:";
-            // 
-            // state_param
-            // 
-            this.state_param.Location = new System.Drawing.Point(136, 53);
-            this.state_param.Multiline = true;
-            this.state_param.Name = "state_param";
-            this.state_param.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.state_param.Size = new System.Drawing.Size(637, 97);
-            this.state_param.TabIndex = 9;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(36, 97);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(81, 12);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "요청파라미터:";
             // 
             // tabPage4
             // 
@@ -413,7 +355,7 @@
             // result_param
             // 
             this.result_param.BackColor = System.Drawing.SystemColors.Info;
-            this.result_param.Location = new System.Drawing.Point(148, 3);
+            this.result_param.Location = new System.Drawing.Point(148, 15);
             this.result_param.Multiline = true;
             this.result_param.Name = "result_param";
             this.result_param.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -514,8 +456,6 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
@@ -529,13 +469,10 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button serverStartBtn;
@@ -546,10 +483,8 @@
         public System.Windows.Forms.TabControl apiTabs;
         public System.Windows.Forms.TextBox cancel_result;
         public System.Windows.Forms.TextBox cancel_param;
-        public System.Windows.Forms.TextBox state_result;
         public System.Windows.Forms.TextBox result_result;
         public System.Windows.Forms.TextBox result_param;
-        public System.Windows.Forms.TextBox state_param;
         public System.Windows.Forms.TextBox httpPort;
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.TextBox result_result_5G;
