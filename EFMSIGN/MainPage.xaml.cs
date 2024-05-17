@@ -13,6 +13,8 @@ public partial class MainPage : ContentPage
         InitializeComponent();
 
         BindingContext = this;
+
+
     }
 
     private async void Button_Clicked(object sender, EventArgs e)
@@ -35,6 +37,13 @@ public partial class MainPage : ContentPage
     private void Button_Clicked_1(object sender, EventArgs e)
     {
         Lines.Clear();
+    }
+
+    //http 서버 start
+    private void Button_Clicked_2(object sender, EventArgs e)
+    {
+        HttpServer  httpServer = new HttpServer();
+        httpServer.Start();
     }
 
     private async void DrawingView_DrawingLineCompleted(object sender, DrawingLineCompletedEventArgs e)

@@ -37,6 +37,15 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<DefaultLanguage>ko</DefaultLanguage>
+		<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+		<AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+		<GenerateTestArtifacts>True</GenerateTestArtifacts>
+		<AppInstallerUri>c:\temp</AppInstallerUri>
+		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+		<PackageCertificateThumbprint>8A42CADBDF339B0E7BEF826B94C56EA7221048C1</PackageCertificateThumbprint>
 	</PropertyGroup>
 
 	<ItemGroup>

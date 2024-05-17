@@ -1,0 +1,35 @@
+﻿<Window x:Class="EFORMWIN.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EFORMWIN"
+        mc:Ignorable="d"
+        Title="서식지 서명" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+          Background="Gray">
+            <DockPanel>
+                <Button x:Name="btnSign"  DockPanel.Dock="Left" Margin="10,0,10,0"
+                      Content="서명하기"
+                      Click="btnSign_Click"  Height="30" Width="110"  />
+            </DockPanel>
+
+        </Grid>
+        <Grid Grid.Row="1">
+            <Frame Name="frame"
+          Grid.Row="1"
+          NavigationUIVisibility="Hidden"
+          Source="view/SignPage.xaml">
+            </Frame>
+
+        </Grid>
+
+
+    </Grid>
+</Window>
