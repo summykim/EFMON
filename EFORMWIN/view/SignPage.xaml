@@ -10,27 +10,10 @@
       Title="SignPage">
 
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0"
-         Background="Gray">
-            <DockPanel>
-                <Button x:Name="btnSign"  DockPanel.Dock="Left" Margin="10,0,10,0"
-                     Content="서명하기"
-                     Click="BtnSign_Click"  Height="30" Width="110"  />
-            </DockPanel>
-
-        </Grid>
-        <Grid Grid.Row="1">
-            <DockPanel>
-                <wv2:WebView2 Name="webView"   Source="https://e-form.sktelecom.com:8010/form/EFormDataWebSign.do?useHstDataId=20240517165256352933"  />
-            </DockPanel>
-        </Grid>
+    <DockPanel>
+        <wv2:WebView2 Name="webView"   Source="https://e-form.sktelecom.com:8010/login/AdminLogin.do"  />
+    </DockPanel>
 
 
-    </Grid>
 </Page>
