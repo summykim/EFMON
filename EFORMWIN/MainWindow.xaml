@@ -18,7 +18,7 @@
                    Content="서명하기"
                    Click="btnSign_Click"  Height="30" Width="110"  />
                 <Button x:Name="btnSignTest"  DockPanel.Dock="Left" Margin="10,0,10,0"
-                   Content="서명하기테스트"
+                   Content="로그인"
                    Click="btnSignTest_Click"  Height="30" Width="110"  />
             </DockPanel>
         </Grid>

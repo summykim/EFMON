@@ -10,6 +10,7 @@ namespace EFORMWIN.data
     static class Session
     {  
         public static bool isLoginSuccess { get; set; }
+        public static bool isOutDomain { get; set; }
         public static string curDomainName { get;set; }
         public static string outDomainName { get;set;}
         public static string inDomainName { get;set;}
