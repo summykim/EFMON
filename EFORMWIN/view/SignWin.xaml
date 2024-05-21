@@ -6,10 +6,11 @@
          xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         xmlns:local="clr-namespace:EFORMWIN.view"
         mc:Ignorable="d"
-        Title="SignWin" Height="450" Width="800">
+        Title="SignWin" Height="450" Width="800" >
     <Grid>
         <DockPanel>
-            <wv2:WebView2 Name="webView"   Source="https://e-form.sktelecom.com:8010/login/AdminLogin.do"  />
+            <Button  Content="테스트" Name="ButTest" Click="ButTest_Click"></Button>
+            <wv2:WebView2 Name="webView"   Source="https://e-form.sktelecom.com:8010"  />
         </DockPanel>
     </Grid>
 </Window>

@@ -27,7 +27,7 @@ namespace EFORMWIN.view
     /// </summary>
     public partial class SignPage : Page
     {
-
+        internal static EFORMWIN.view.SignPage signPage1;
         public SignPage()
         {
             InitializeComponent();
@@ -36,7 +36,10 @@ namespace EFORMWIN.view
             webView.NavigationCompleted += WebView_NavigationCompleted;
 
             initializeAsync();
-            
+
+            signPage1 = this;
+
+
         }
 
         private async void WebView_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
 using System.Linq;
-using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -14,23 +11,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Xml.Linq;
-using EFORMWIN.data;
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.Wpf;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
-namespace EFORMWIN.view
+namespace EFORMDLL
 {
     /// <summary>
-    /// SignWin.xaml에 대한 상호 작용 논리
+    /// UserControl1.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class SignWin : Window
+    public partial class EformControll : UserControl
     {
-       
-        public SignWin()
+        public string  eformSignUrl;
+        public string addScript;
+        public string jsonData;
+        public EformControll()
         {
             InitializeComponent();
             init();
@@ -42,7 +39,7 @@ namespace EFORMWIN.view
             webView.EnsureCoreWebView2Async();
         }
 
-        private  void CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
+        private void CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
         {
             if (e.IsSuccess)
             {
@@ -54,13 +51,13 @@ namespace EFORMWIN.view
                 webView.CoreWebView2.NavigationCompleted += CoreWebView2_NavigationCompleted;
                 webView.CoreWebView2.WebMessageReceived += CoreWebView2_WebMessageReceived;
 
-                Uri eformSignURI = new Uri(Session.curDomainName + Session.eformSignUrl);
+                Uri eformSignURI = new Uri(eformSignUrl);
                 webView.Source = eformSignURI;
 
                 //webView.CoreWebView2.Navigate(Session.curDomainName + Session.eformSignUrl);
 
-                string script = Properties.Settings.Default.AddFunc;
-                webView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(script);
+     
+                webView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(addScript);
 
                 webView.CoreWebView2.OpenDevToolsWindow();
             }
@@ -73,14 +70,14 @@ namespace EFORMWIN.view
             Console.WriteLine(e.WebMessageAsJson);
 
 
-            
+
 
 
         }
 
-        private async  void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-          
+
 
 
         }
@@ -114,7 +111,7 @@ namespace EFORMWIN.view
             Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
 
 
-    
+
         }
 
         private void ButTest_Click(object sender, RoutedEventArgs e)
@@ -124,16 +121,16 @@ namespace EFORMWIN.view
 
         private async void eformPreView()
         {
-           // string jsscript = "document.getElementById('jsonData').value";
-           // string testJson = await SignPage.signPage1.webView.ExecuteScriptAsync(jsscript);
-            string testJson = Properties.Settings.Default.testJson;
-            testJson = Regex.Replace(testJson, @"/\/\*(.*?)\*\//g", "");
-            Console.WriteLine(testJson);
-            Console.WriteLine(JObject.Parse(testJson));
-            
+            // string jsscript = "document.getElementById('jsonData').value";
+            // string testJson = await SignPage.signPage1.webView.ExecuteScriptAsync(jsscript);
+
+            jsonData = Regex.Replace(jsonData, @"/\/\*(.*?)\*\//g", "");
+            Console.WriteLine(jsonData);
+            Console.WriteLine(JObject.Parse(jsonData));
+
             JObject data = new JObject(
                   new JProperty("message", "start"),
-                  new JProperty("data", JObject.Parse(testJson))
+                  new JProperty("data", JObject.Parse(jsonData))
                 );
             JObject message = new JObject(
               new JProperty("data", data.ToString())

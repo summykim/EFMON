@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using EFORMWIN.data;
 using EFORMWIN.view;
 
@@ -36,23 +37,41 @@ namespace EFORMWIN
         {
             this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             this.WindowState = WindowState.Maximized;
+
+            //외부망인경우
+            if (Session.isOutDomain)
+            {
+                btnLogin.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnLogin.Visibility = Visibility.Hidden;
+            }
         }
 
         private void btnSign_Click(object sender, RoutedEventArgs e)
         {
-            SignWin signWin = new SignWin();
-            signWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            signWin.WindowState = WindowState.Maximized;
-            signWin.Show();
+
+             SignWin signWin = new SignWin();
+             signWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+             signWin.WindowState = WindowState.Maximized;
+             signWin.Show();
         }
 
-        private void btnSignTest_Click(object sender, RoutedEventArgs e)
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            LoginWin lw = new LoginWin();
+            lw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            lw.WindowState = WindowState.Maximized;
 
-                LoginWin lw = new LoginWin();
-                lw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                lw.WindowState = WindowState.Maximized;
-                lw.ShowDialog();
+            if (lw.ShowDialog()==true)
+            {
+                Console.WriteLine("true");
+            }
+            else
+            {
+                SignPage.signPage1.webView.CoreWebView2.Reload();
+            }
 
         }
     }

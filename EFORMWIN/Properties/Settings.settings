@@ -1,7 +1,425 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EFORMWIN.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AddFunc" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">function cancelSign(){
+	var callback = function(){
+		var messageJson = {
+			resultCode : "R03"
+		};
+
+		 window.chrome.webview.postMessage(JSON.stringify(messageJson));
+	}
+
+	if(gTokenId != ''){
+		var param = {};
+		param.toknId = gTokenId;
+		param.hstUseId = gFormMetaData.common.useHstId;
+
+		$.ajax({
+	          url    : '/DelSignTokn.ajax'
+	        , type   : 'POST'
+	        , data   : param
+	        , dataType : 'json'
+	        , success:function(data, textStatus, jqXHR){
+	        	if(data.result == 'S'){
+					hidePopupLoadingIndicator();
+					gTokenId = '';
+
+					alert('서명이 취소 되었습니다.');
+					callback();
+	        	}
+	        	closeAllPopup();
+	        }
+			, error : function( jqXHR, textStatus, errorThrown ){
+				closeAllPopup();
+			}
+		});
+	}else{
+		closeAllPopup();
+		callback();
+	}
+}
+</Value>
+    </Setting>
+    <Setting Name="testJson" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{
+    "exec_typ_cd": "S",
+    "op_data": {
+        "EQP_MDL_NM": "휴대폰 모델명",
+        "EQP_SER_NUM": "일련번호",
+        "CUST_TYP_ETC": "기타",
+        "OUT_PRC": "출고가",
+        "MTH_AVG_DATA_USE_QTY": "데이터",
+        "MTH_AVG_VOICE_USE_QTY": "음성",
+        "MTH_AVG_LTR_USE_QTY": "문자",
+        "PRCPLN_NM": "선택 요금제명",
+        "TOT_FEE_DC": "총 요금할인(24개월 기준)",
+        "EQP_SUPRT_AMT": "단말기 지원금",
+        "CUST_NM": "고객명",
+        "DIV_RPAY_MTH_CNT": "개월",
+        "MBL_PHON_CNTRCT_GUID_YN": "",
+        "TOT_SUPRT_AMT": "총 지원금",
+        "SUPRT_AMT": "지원금",
+        "FRGNR_YN": "",
+        "ETC_DC": "기타할인",
+        "EQP_PRC": "단말대금",
+        "CASH_BUY_PRC": "현금구입가",
+        "MTH_FIXAMT": "월정액",
+        "TOT_DC_AMT": "총 할인액",
+        "FEE_AGRMT_DC_AMT": "요금약정할인",
+        "SEL_AGRMT_DC_AMT": "선택약정할인",
+        "MTH_EQP_BUY_COST": "휴대폰 구입비",
+        "MTH_COMM_FEE": "통신요금",
+        "MTH_PAY_AMT": "합계",
+        "EQP_DC_AMT": "단말할인",
+        "EQP_PAYBK_AMT": "현금 페이백",
+        "RTN_AMT_DIV_RPAY_AMT": "반환금/분할상환금",
+        "TOT_DIV_RPAY_CMMS": "총 분할상환수수료",
+        "NEW_SAFE_NUM": "신규 안심번호(T안심콜)",
+        "USIM_SER_NUM": "USIM",
+        "GRTM_CL_CD": "CASH", /* 보증금 */ /* CASH|EXMPT|INSU */ /* 현금|면제|보증보험 */ 
+        "DATA_ROMING_CD": "ROMING_ONEPASS", /* 데이터 로밍 */ /* ROMING_ONEPASS|ISOL */ /* T로밍 원패스|차단 */ 
+        "TMOA_COPN_NUM": "T모아쿠폰 No.",
+        "CNTC_NUM": "연락가능한 전화번호",
+        "BILL_ISUE_TYP_CD": "SMBIL", /* 청구서 수신 방법 */ /* SMBIL|SMSMMS_BILL|EMAIL_BILL|T_WLD|BILL_NREQ|ETC|PDF_BILL */ /* 스마트청구서|문자청구서|이메일청구서|T world확인|청구서 미신청|기타|바로보는 요금안내서 */ 
+        "INV_EMAIL_ADDR": "이메일청구서",
+        "INTEG_SVC_NUM": "통합번호",
+        "BANK_CARD_CO_NM": "은행(카드사)명",
+        "BANK_CARD_NUM": "계좌(카드)번호",
+        "DPST_CARD_OWNR_NM": "예금주(카드주)",
+        "DPST_CARD_OWNR_BIRTH_DT": "예금주(카드주)법정생년월일",
+        "CARD_EFF_PRD_YR": "카드유효기간 년",
+        "CARD_EFF_PRD_MTH": "카드유효기간 월",
+        "DPST_CARD_OWNR_REL_NM": "관계",
+        "NP_SVC_NUM": "이동할 전화번호",
+        "BF_COMM_CO_CL_CD": "KT", /* 변경 전 통신회사 */ /* KT|LGU|MVNO */ /* KT|LG U+|MVNO */ 
+        "BF_COMM_CO_CL_NM": "MVNO",
+        "NP_AUTH_CD": "USIM_SER_NUM_LAST_4", /* 번호이동 인증방법 (택1) */ /* USIM_SER_NUM_LAST_4|CRDT_CARD_NUM_LAST_4|BANK_NUM_LAST_4|GIRO */ /* 단말기(USIM) 일련번호 뒷 네자리|신용카드 번호 뒷 네자리|요금납부 은행 계좌 또는 합산 청구번호 뒷 네자리|지로납부 */ 
+        "CORP_REQR_NM": "이름",
+        "USE_FEE_PAY_MTHD_CD": "IMPAY", /* 이달 사용요금 */ /* IMPAY|LPAY */ /* 즉시납부|청구서 받은 후 납부 */ 
+        "NY_RFND_AMT_FEE_SETOFF_CD": "AGREE", /* 미 환급액 요금상계 */ /* AGREE|NY_AGREE */ /* 동의|미동의 */ 
+        "EQP_AL_FRAY_KEEP_CD": "ALLOT_FPAY", /* 단말기 할부 */ /* ALLOT_FPAY|ALLOT_KEEP */ /* 할부완납|할부지속 (변경 전 통신회사에서 청구) */ 
+        "OTCO_NUM_CHG_PLUS": [
+            "REQ",
+            "/* 타사번호변경플러스: 신청 */"
+        ],
+        "OPR_NM": "판매자",
+        "SHOP_PHON_NUM": "연락처",
+        "BIRTH_DT": "950101",
+        "AGNT_NM": "이름(위임받는 분)",
+        "LEGAL_REPVE_NM": "법정대리인",
+        "GATE_ODER_FORM_NUM": "비대면 주문번호(신청서번호)",
+        "GATE_SELF_SIGN_CD": "비대면 본인 서명 구분 코드",
+        "GATE_LEGAL_SIGN_CD": "비대면 법정대리인 서명 구분 코드",
+        "SCUR_GR_CD": [
+            "ONLINE_SVC_PERM_REJT",
+            "AGNT_SVC_PERM_REJT",
+            "2LN_OVR_SVC_PERM_REJT",
+            "3LN_OVR_SVC_PERM_REJT",
+            "/* 보안등급 설정: 온라인 개통 허용안함|대리인 개통 허용안함|2회선 초과 개통 허용안함|3회선 초과 개통 허용안함 */"
+        ],
+        "T_WLD_TC_DTL_OFR_YN": "Y", /* T world 요금확인 통화내역 신청 */ /* REQ|CNCL */ /* 신청|신청 취소 */ 
+        "FMLY_1_CUST_NM": "이름",
+        "FMLY_1_SVC_NUM": "이동전화번호",
+        "FMLY_1_BIRTH_DT": "법정생년월일",
+        "FMLY_1_REP_REL_NM": "가족대표와의 관계",
+        "FMLY_2_CUST_NM": "이름",
+        "FMLY_2_SVC_NUM": "이동전화번호",
+        "FMLY_2_BIRTH_DT": "법정생년월일",
+        "FMLY_2_REP_REL_NM": "가족대표와의 관계",
+        "FMLY_3_CUST_NM": "이름",
+        "FMLY_3_SVC_NUM": "이동전화번호",
+        "FMLY_3_BIRTH_DT": "법정생년월일",
+        "FMLY_3_REP_REL_NM": "가족대표와의 관계",
+        "FMLY_4_CUST_NM": "이름",
+        "FMLY_4_SVC_NUM": "이동전화번호",
+        "FMLY_4_BIRTH_DT": "법정생년월일",
+        "FMLY_4_REP_REL_NM": "가족대표와의 관계",
+        "USIM_PAY_TYP_CD": "IMPAY", /* USIM */ /* IMPAY|NXT_MON_TOT|REUSE|ESIM */ /* 즉납|다음달 요금 합산|재사용|eSIM */ 
+        "DATA_HLMT": "5000_WON", /* 데이터 상한 */ /* 5000_WON|10000_WON|15000_WON */ /* 5,000|10,000|15,000 */ 
+        "TING_PRCPLN_CHRG_PERM_AMT_SET_CD": "5000_WON", /* 팅요금제 충전 허용금액 설정 */ /* 5000_WON|10000_WON|15000_WON|20000_WON|ETC_WON */ /* 5,000원|10,000원|15,000원|20,000원|기타 */ 
+        "LEGAL_REPVE_CNTC_NUM": "이동 전화번호",
+        "WLESS_CNTNTS_SAMT_STL_RST_YN": "Y", /* 무선콘텐츠 소액결제 이용제한 */ 
+        "LEGAL_REPVE_SIGN_YN": "법정대리인 서명 여부",
+        "SILV_EXCLSV_PRCPLN_CD": "NEW_SILV_PRCPLN", /* 실버전용 요금제 */ /* NEW_SILV_PRCPLN|TGRP_SILV|TPLAN_SNIR_SPCL|BAND_SILV_SAV|SILV_SMART_15|TPLAN_SNIR_ESSNC|BAND_SILV_12G|GOLD_AGE_15|TPLAN_SNIR_SAV_45|BAND_SILV_22G|GOLD_AGE_34|TPLAN_SNIR_SAV_28|TPLAN_SNIR_SAV */ /* T끼리 어르신|T플랜 시니어 스페셜|뉴실버요금제|T플랜 시니어 에센스|band 어르신 세이브|실버스마트15|T플랜 시니어 안심4.5G|band 어르신 1.2G|골든에이지15|T플랜 시니어 안심2.8G|band 어르신 2.2G|골든에이지34|T플랜 시니어 세이브 */ 
+        "SILV_PRCPLN_GUID_YN": "Y", /* 실버전용 요금제와 기타 가입 요금제의 안내를 받음 */ 
+        "TRNSFR_REQR_CL_CD": "SELF", /* 명의를 주는자 */ /* SELF|AGNT|LEGAL_REPVE */ /* 본인|대리인|법정대리인 */ 
+        "T_GLXY_CLUB_ZERO_SCRB_YN": "Y", /* T 갤럭시 클럽제로 신청여부 */ 
+        "CHKR_POST_SHOP_NM": "확인(통화)자 소속 영업장명",
+        "CHECK_EMP_NM": "확인자(직원) 성명",
+        "TRNSFR_CNTC_NUM": "양도인 연락처",
+        "CHECK_DTM": "통화일시",
+        "PASSPORT_NUM": "여권번호",
+        "REQR_CL_CD": "SELF", /* 방문 고객 */ /* SELF|AGNT|LEGAL_REPVE */ /* 본인|대리인|법정대리인 */ 
+        "EQP_AGRMT_SUCES_YN": "Y", /* 약정승계단말기 변경 잔여 할부기간 이월 */ 
+        "EQP_REM_ALLOT_SUPRT_AMT": "잔여할부할인금 이월",
+        "AGN_NM": "대리점",
+        "EQP_ALLOT_AMT": "할부금액",
+        "REQ_SVC_NUM": "신규가입 번호(WiBro ID)",
+        "RUSER_REL_CD": "EMP", /* 명의고객과의 관계 */ /* EMP|OFFCR */ /* 직원|임원 */ 
+        "MBR_USE_DTL_AD_RCV_AGREE_YN": "AGREE", /* 멤버십 이용내역 광고 수신 동의 */ /* AGREE|NY_AGREE */ /* 동의합니다.|동의하지 않습니다. */ 
+        "STRD_GUID_SUPL_SVC_ID": "부가상품ID",
+        "EQP_MFACT_NM": "단말 제조사",
+        "IMEI_NUM": "IMEI 정보 (15자리 숫자)",
+        "WIFI_MAC_ADDR": "Wi-Fi MAC 주소 (12자리 영/숫자 혼용)",
+        "NW_MTHD_CD": "WCDMA", /* 네트워크 유형 */ /* WCDMA|LTE|ETC|5G */ /* 3G(WCDMA)|4G(LTE)|기타|5G */ 
+        "EQP_TYP_CL_CD": "SMPHON", /* 단말 유형 */ /* SMPHON|TBLT|ETC */ /* 스마트폰|태블릿|기타 */ 
+        "FREQ_SUPRT_YN": "YES", /* 당사 주파수 지원 여부 */ /* YES|NO */ /* 예|아니오 */ 
+        "SMS_MMS_STRD_SUPRT_YN": "YES", /* 당사 SMS/MMS 규격 지원 여부 */ /* YES|NO */ /* 예|아니오 */ 
+        "SHOP_ORG_ID": "처리영업장코드",
+        "FEE_PAY_MTHD_CD": "ATRNF", /* 요금납부 방법 */ /* ATRNF|DPST_EXCLSV_BANK|GIRO */ /* 자동이체 신청|입금전용계좌|지로 */ 
+        "BILL_ISUE_TYP_YN": "Y", /* 요금확인 방법 */ 
+        "MTH_EQP_BUY_COST_CL_CD": "EQP_BUY_DIV", /* 휴대폰 구입비 */ /* EQP_BUY_DIV|EQP_BUY_CASH|EQP_BUY_MATE */ /* 분할상환( 개월)|현금|T렌탈 */ 
+        "SML_AMT_SETTL_PWD_YN": "Y", /* 안전한 결제를 위해 비밀번호를 꼭 설정하시기 바랍니다. */ 
+        "SHOP_ADDR": "주소",
+        "WLF_DC_CD": "HNDCAP", /* 개인 */ /* HNDCAP|HNDCAP_CHILD_WLF_FCLT_ADMINR|BAS_LIFE_SPDMR_DWL_EDU|BAS_LIFE_SPDMR_MEDIC_LIVI|SSUP_LIFE_SPDMR|PUB_MERI|MANY_CHLD_HOUS|SILV_HOUS|BAS_PENSN_SPDMR */ /* 장애인|장애인(아동)복지시설운영자|기초생활수급자(주거/교육)|기초생활수급자(의료/생계)|차상위계층|국가유공자|다자녀가구|실버가구|기초연금수급자 */ 
+        "RDTN_CL_CD": "SPCL_SCH", /* 법인 */ /* SPCL_SCH|PUB_MERI_ASO|HNDCAP_CHILD_WLF_CORP|HNDCAP_CHILD_WLF_ASO */ /* 특수학교|국가유공자단체|장애인(아동)복지법인|장애인(아동)복지단체 */ 
+        "SUPRT_AMT_MTHD_CD": "FEE_DC", /* 지원금 방식 선택 */ /* FEE_DC|NOTC_SUPM */ /* 가. 지원금 상응 요금할인|나. 단말기 지원금 */ 
+        "DIV_RPAY_YN": "Y", /* 분할상환 */ /* DIV_RPAY|DIV_RPAY_FRN|LUMPS|MATE_RENT|TWD_RENT */ /* 분할상환|외국인분할상환|일시납|테이크임대|T렌탈(TWD) */ 
+        "JOIN_CARD_AMT": "제휴카드 금액",
+        "WBR_ID": "(WiBro ID)",
+        "TAX_BILL_ISUE_YN": "Y", /* 세금계산서 발행 */ 
+        "INTEG_INV_YN": "Y", /* 동일명의 통합청구 */ 
+        "SH_TM_RCV_YN": "Y", /* 신한T주거래통장TM수신동의 */ 
+        "NP_AUTH_LAST_4": "번호이동 인증방법 뒷 네자리",
+        "FMLY_REP_YN": "Y", /* 대표여부 */ 
+        "RGCUST_SCRB_YN": "Y", /* 단골고객 가입 여부 */ 
+        "LEGAL_REPVE_BIRTH_DT": "법정생년월일",
+        "CUST_TYP_CD": "INDV", /* 고객구분 */ /* INDV|BIZR|CORP|PUB_INST|ETC */ /* 개인|개인사업자|법인|공공기관|기타 */ 
+        "IPHON_YN": "Y", /* 아이폰 여부 */ 
+        "AGNT_BIRTH_DT": "법정생년월일",
+        "TING_PRCPLN_CHRG_PERM_AMT_SET_ETC": "기타",
+        "MBL_PHON_NUM": "휴대폰",
+        "DSNET_ADD_SUPRT_AMT": "유통망 추가지원금",
+        "EQP_REM_ALLOT_MTH": "개월",
+        "VISIT_CUST": "SELF", /* 방문고객 */ /* SELF|AGNT|LEGAL_REPVE */ /* 본인|대리인|법정대리인 */ 
+        "NW_MTHD_ETC": "기타",
+        "EQP_TYP_CL_ETC": "기타",
+        "JOIN_CARD_YN": "Y", /* 제휴카드 여부 */ 
+        "AGRMT_PRD_MTH_CNT": "약정기간",
+        "CORP_REQR_BIRTH_DT": "법정생년월일",
+        "AGNT_REL_CD": "010", /* 대리인관계코드 */ /* 010|021|031|041|050|061|070|080|090|101|110|990 */ /* 본인|부모|배우자|형제/자매|자녀|친척|친구/연인|외국인|해당법인직원|후견인|법인등기이사|기타 */ 
+        "MBR_BAS_ADDR": "멤버십 기본주소",
+        "MBR_DTL_ADDR": "멤버십 상세주소",
+        "MBR_ZIP": "멤버십 우편번호",
+        "LEGAL_CTZ_NUM": "주민등록번호",
+        "COURT_AGNT_REL_CD": "010", /* 법정대리인관계코드 */ /* 010|021|031|041|050|061|070|080|090|101|110|990 */ /* 본인|부모|배우자|형제/자매|자녀|친척|친구/연인|외국인|해당법인직원|후견인|법인등기이사|기타 */ 
+        "ADD_PROD_LIST_ID": "부가요금제/부가서비스",
+        "PRCPLN_ID": "선택 요금제명",
+        "ZIP": "주소",
+        "CORP_REG_NUM": "법인등록번호",
+        "BIZ_REG_NUM": "사업자등록번호",
+        "FRGNR_RGST_NUM": "외국인등록번호",
+        "AGNT_CNTC_NUM": "연락받을 전화번호",
+        "BAS_ADDR": "주소",
+        "DTL_ADDR": "주소",
+        "OMD_YN": "OMD 여부",
+        "TPET_YN": "TPET 여부",
+        "DPST_CARD_OWNR_CNTC_NUM": "예금주(카드주)이동전화번호",
+        "FMLY_DIV_DATA_REQ_YN": "",
+        "PT": "포인트",
+        "SVC_AGRMT_DC_CD": [
+            "AA",
+            "AB",
+            "AG",
+            "/* 서비스약정할인코드: 이동전화 요금약정할인|태블릿 요금약정할인|선택약정할인 */"
+        ],
+        "SVC_AGRMT_PRD_CD": [
+            "D0365",
+            "D0730",
+            "M0012",
+            "M0024",
+            "/* 서비스약정기간코드: 365 일|730 일|12 개월|24 개월 */"
+        ],
+        "DPST_CARD_OWNR_REL_CD": "010", /* 예금주카드주 관계 */ /* 010|021|031|041|050|061|070|080|090|101|110|990 */ /* 본인|부모|배우자|형제/자매|자녀|친척|친구/연인|외국인|해당법인직원|후견인|법인등기이사|기타 */ 
+        "ALLOT_INT_AMT": "총 분할상환 수수료(연 5.9%)",
+        "EQP_MTH_ALTM": "휴대폰 월 분할상환금(A)",
+        "MTH_FIXAMT_PRCPLN": "월 정액요금",
+        "MTH_FEE_DC_AMT": "월 요금할인",
+        "MTH_BAS_PAY_AMT": "월 기본 납부액(A)+(B)",
+        "DC_PEN_M12": "위약금(12개월째)",
+        "DC_PEN_M18": "위약금(18개월째)",
+        "CUST_CL_CD": "GNRL", /* 고객구분 */ /* GNRL|TEEN|SILV */ /* 일반|청소년|실버 */ 
+        "NEW_OP_CL_CD": [
+            "MBL_PHON_NEW",
+            "NP",
+            "NP_RECALL",
+            "PRE_POST_PAY_CNVT",
+            "USIM_SVC",
+            "WBR",
+            "EQP_CHG",
+            "/* 업무 구분: 이동전화 신규|번호이동|번호이동 철회|선후불 전환|USIM 개통|WiBro|단말기변경 */"
+        ],
+        "OLD_EQP_MDL_NM": "중고단말 모델명",
+        "OLD_EQP_IMEI": "중고단말 IMEI",
+        "OLD_EQP_SER_NUM": "중고단말 일련번호",
+        "OLD_EQP_CNTC_NUM": "이동전화번호",
+        "OLD_EQP_BANK_NM": "은행명(계좌송금시)",
+        "OLD_EQP_DPST_OWNR_NM": "예금주(계좌송금시)",
+        "OLD_EQP_BANK_NUM": "계좌번호(계좌송금시)",
+        "PPAY_AMT": "선 납부금",
+        "MBR_NEWISU_YN": "AGREE", /* 멤버십신규발급여부 */ /* AGREE|NY_AGREE */ /* 예|아니오 */ 
+        "MBR_OP_CL_CD": "SCRB", /* 업무 유형 */ /* SCRB|REISU|TYP_CHG|TMP_SUSP_REQ|TMP_SUSP_REL|MBR_SCSS */ /* 신규가입|재발급|종류변경|일시정지 신청|일시정지 해제|멤버십 탈퇴 */ 
+        "SMS_AGREE_YN": "",
+        "OCB_ACCUM_AGREE_YN": "",
+        "MBR_WPHON_NUM": "멤버십 유선전화",
+        "EVENT_ID": "비대면 예약번호",
+        "TS_VAL_NO": "비대면 차수",
+        "SVC_SCHD_DT": "비대면 예약일",
+        "TOT_USE_FEE": "총 이용료(24개월기준)",
+        "MTH_USE_FEE": "월 이용료",
+        "CNTRCT_STA_DT": "계약시작일",
+        "CNTRCT_END_DT": "계약종료일",
+        "SVC_CHG_CD": "업무구분",
+        "BILL_ISUE_TYP_CD_NM": "청구서발행유형명",
+        "MATE_MID_TERM_AMT": "T렌탈  중도해지금(1~24개월)",
+        "MATE_MTH_USE_FEE_1": "T렌탈 월이용료(1~24개월)",
+        "MATE_MTH_USE_FEE_2": "T렌탈 월이용료(25~36개월)",
+        "MATE_AGRMT_PRD_MTH_CNT": "T렌탈 약정기간",
+        "MATE_MTH_USE_FEE": "T렌탈 월 이용료(신규신청서용)",
+        "FEE_PAY_MTHD_NM": "납부방법",
+        "CELL_CHG_PSBL_DT": "반납가능일",
+        "MATE_MID_TERM_AMT_M12": "T렌탈 중도해지금(12개월)",
+        "MATE_MID_TERM_AMT_M18": "T렌탈 중도해지금(18개월)",
+        "DISTR_SMS_REV_IMPSBL_OBJ_MDL_YN": "재난문자 미수신 단말 여부",
+        "CURR_EQP_MDL_NM": "기기모델",
+        "CURR_EQP_MFACT_NM": "제조사",
+        "CURR_EQP_SER_NUM": "단말 일련번호",
+        "SEL_AGREE_SIGN_UNUSE_YN": "선택동의서명 미사용여부",
+        "EID": "애플EID",
+        "LEGAL_REPVE_EMAIL": "법정대리인 이메일",
+        "LEGAL_CNTC_NUM_SKT_YN": "Y", /* 법정대리인 연락처 SKT회선여부 */ 
+        "PSAFE4_OCB_REQ_YN": "캐쉬백 제휴서비스 동의",
+        "ASVC_OUT_PRC": "개통후출고가",
+        "ASVC_TOT_SUPRT_AMT": "개통후총지원금",
+        "LEGAL_REPVE_CNTC_NUM_2": "법정대리인 일반연락처",
+        "LEGAL_CNTC_NUM2_SKT_YN": "Y", /* 법정대리인 일반연락처 SKT회선여부 */ 
+        "OKSUSU_POINT_REQ": "PT_01", /* OKSUSU 패키지 포인트 */ /* PT_01|PT_02 */ /* 포인트3000|포인트10000 */ 
+        "DISTR_POCKETFI_YN": "포켓파이교체대상여부",
+        "TO_2G_SERVICE_YN": "2G 단말기 교체 프로그램 동의 여부",
+        "TOT_USE_FEE_RENT": "총 이용금액(T렌탈)",
+        "SUB_PROD_ID": "부가혜택상품ID",
+        "OCALL_NUM_DISP_TXT": "번호연결서비스기타",
+        "TO_2G_SERVICE_BTN_YN": "2G 대상전환 식지여부",
+        "FADE_OUT_2G_BTN_YN": "LTE전환대상",
+        "ASVC_DIV_RPAY_MTH_CNT": "개통후 할부개월",
+        "ASVC_SEL_AGRMT_DC_AMT": "개통후 선택약정할인",
+        "ASVC_MTH_COMM_FEE": "개통후 통신요금",
+        "ASVC_PRCPLN_NM": "개통후 선택 요금제",
+        "CNVT_REQ_NUM": "010전환신청전화번호",
+        "NUM_INTEG_NP_REQ_SVC_CD": "GEN_NP", /* 010번호통합관련 번호이동신청서비스 */ /* GEN_NP|NUM_DISP */ /* 세대간 번호이동|01X번호표시 서비스 */ 
+        "NUM_DISP_REQ_KEEP_YN": "AGREE", /* 01X번호표시 서비스 지속여부 */ /* AGREE|NY_AGREE */ /* 예|아니오 */ 
+        "NUM_INTEG_NP_SVC_YN": "010번호통합서비스여부",
+        "NUM_DISP_REQ_KEEP_NP_YN": "AGREE", /* 01X번호표시 서비스 지속여부(번호이동용) */ /* AGREE|NY_AGREE */ /* 예|아니오 */ 
+        "OCALL_NUM_DISP_NP": "GEN_NP_TYP", /* 01X번호표시 서비스(번호이동용) */ /* GEN_NP_TYP|OPEN_TYP|LTR_TYP|ETC */ /* 세대간번호이동|공개|문자|기타 */ 
+        "FADE_OUT_SUPRT_CD": "FEE_DC", /* LTE전환지원금방식 */ /* FEE_DC|NOTC_SUPM|PPAY_SUPRT */ /* 월요금할인|단말기 지원금|선불전환지원 */ 
+        "ASVC_PPAY_AMT": "개통후선납금",
+        "CUST_BASE_VR_ZIP": "VR 배송 우편번호",
+        "CUST_BASE_VR_BAS_ADDR": "VR 배송 기본주소",
+        "CUST_BASE_VR_DTL_ADDR": "VR 배송 상세주소",
+        "SVC_5G_REQ_YN": "AGREE", /* 5G서비스신청여부 */ /* AGREE|NY_AGREE */ /* 동의|미동의 */ 
+        "ASC369_PSNL_INFO_THDP_AGREE_YN": "AGREE", /* 추가 서비스(안심보상+369) 제공동의 및 개인정보 제3자 활용동의 */ /* AGREE|NY_AGREE */ /* 동의|비동의 */ 
+        "EQP_SIM_TYPE": "단말기 SIM유형",
+        "ADD_EQP_MDL_NM": "부가단말 모델명",
+        "ADD_EQP_SER_NUM": "부가단말 일련번호",
+        "TOT_OUT_PRC": "총합계 출고가",
+        "ADD_OUT_PRC": "부가단말출고가",
+        "TID_PSNINF_PRA_YN": "Y", /* T 아이디 가입을 위한 개인정보 수집 및 이용 동의 */ /* Y|N */ /* 예|아니오 */ 
+        "BAS_ADDR_5G": "5G 주생활지역 주소(기본주소)",
+        "CHLD_GRAD": "자녀 학년",
+        "CHLD_CNTC_NUM": "자녀 연락처",
+        "IMEI_NUM2": "IMEI2 (15자리 숫자)",
+        "OMD_EID": "OMD EID (32자리 숫자)",
+        "SUBS_DLVR_REQ_DT": "구독배송희망일",
+        "SUBS_INDPND1_OPT_NM_1": "구독단독상품1_옵션명1",
+        "SUBS_INDPND1_OPT_NM_2": "구독단독상품1_옵션명2",
+        "SUBS_INDPND2_OPT_NM_1": "구독단독상품2_옵션명1",
+        "SUBS_INDPND2_OPT_NM_2": "구독단독상품2_옵션명2",
+        "SUBS_INDPND3_OPT_NM_1": "구독단독상품3_옵션명1",
+        "SUBS_INDPND3_OPT_NM_2": "구독단독상품3_옵션명2",
+        "SUBS_INDPND4_OPT_NM_1": "구독단독상품4_옵션명1",
+        "SUBS_INDPND4_OPT_NM_2": "구독단독상품4_옵션명2",
+        "SUBS_INDPND5_OPT_NM_1": "구독단독상품5_옵션명1",
+        "SUBS_INDPND5_OPT_NM_2": "구독단독상품5_옵션명2",
+        "ADD_PROD_PRICE_LIST_NM": "부가상품명목록",
+        "HPSTL_SAFE_NOTI_SVC": "AGREE", /* 휴대폰결제 안심통보서비스 */ /* AGREE|NREQ */ /* 이용동의|미신청 */ 
+        "OLD_PAY_TYP_CD": "PRE_DC", /* 지급방법 */ /* PRE_DC|TRNSF|PPAY */ /* 단말할부 선할인|계좌이체|요금선납 */ 
+        "GLXY_FE_CLUB_TYP": "S23", /* 갤럭시 FE클럽 가입 코드 */ /* S23 */ /* 갤럭시S23FE클럽 */ 
+        "PRE_AGRMT_PRD_CD": "M12_PLUS_AGRMT", /* 약정기간 사전신청 */ /* M12_PLUS_AGRMT */ /* 12개월사전신청 */ 
+        "DATA_COMB_DC_RTN_CHECK_YN": "비대면서명용_할인반환금 확인",
+        "DATA_TBLT_DC_RTN_CHECK_YN": "비대면서명용_할인반환금 확인",
+        "EQP_TRAD_CNTRCT_YN": "비대면서명용_단말매매 계약 관련 고객 안내사항",
+        "EQP_TRAD_STPL_YN": "비대면서명용_단말매매약관",
+        "FEE_DC_SYS_SCRB_AGREE_YN": "비대면서명용_할인반환금 확인",
+        "GLXY_CLUBN_PSNINF_OFR_YN": "비대면서명용_개인정보 제 3자 제공",
+        "GLXY_CLUBN_PSNINF_PRA_YN": "비대면서명용_개인정보 수집 및 이용 동의",
+        "OKSUSU_PAGR_01_YN": "비대면서명용_개인정보의 수집ㆍ이용",
+        "OKSUSU_PAGR_02_YN": "비대면서명용_개인정보 제3자 제공 [SK텔레콤㈜ 귀중]",
+        "OKSUSU_PAGR_03_YN": "비대면서명용_정보제공 수신동의",
+        "OKSUSU_PAGR_04_YN": "비대면서명용_고객혜택 제공을 위한 개인정보 수집. 이용, 취급위탁 및 정보/광고 수신동의",
+        "OKSUSU_PAGR_05_YN": "비대면서명용_개인맞춤형 혜택/정보제공 위한 3자 제공동의",
+        "PREM_CLUB_PSNINF_OFR_YN": "비대면서명용_개인정보 제 3자 제공",
+        "PREM_CLUB_PSNINF_PRA_YN": "비대면서명용_개인정보 수집 및 이용 동의",
+        "PREM_CLUB2_CMP_YN": "비대면서명용_분실/파손 시 보상예시 (분실 시 동일기기 보상 원칙)",
+        "PREM_CLUB2_IDNT_OFR_YN": "비대면서명용_고유식별정보 수집ㆍ이용ㆍ제공 동의",
+        "PREM_CLUB2_PSNINF_OFR_YN": "비대면서명용_개인정보 제3자 제공",
+        "PREM_CLUB2_PSNINF_PRA_YN": "비대면서명용_개인정보 수집 및 이용 동의",
+        "PSAFE_AS_PSNINF_OFR_YN": "비대면서명용_개인정보 제 3자 제공",
+        "PSAFE_AS_PSNINF_PRA_YN": "비대면서명용_개인정보 수집 및 이용 동의",
+        "PSAFE4_CMP_AGREE_YN": "비대면서명용_보상관련 동의",
+        "PSAFE4_MAIN_CTT_AGREE_YN": "비대면서명용_폰세이프IV 주요 내용",
+        "PSAFE4_PSNINF_OFR_YN": "비대면서명용_개인정보 제 3자 제공 동의",
+        "PSAFE4_PSNINF_PRA_YN": "비대면서명용_개인정보 수집/이용 동의",
+        "PSNINF_PAGR_01_YN": "비대면서명용_개인정보ㆍ개인위치정보 수집ㆍ이용 동의",
+        "PSNINF_PAGR_02_YN": "비대면서명용_서비스 제공을 위한 개인정보 제3자 제공 동의",
+        "PSNINF_PAGR_03_YN": "비대면서명용_개인신용정보 조회 동의",
+        "PSNINF_PAGR_04_YN": "비대면서명용_고유식별정보(주민등록번호/외국인등록번호/여권번호) 처리 동의",
+        "PSNINF_PAGR_05_YN": "비대면서명용_할상환 등 서비스제공을 위한 개인정보 제3자 제공 동의",
+        "PSNINF_PAGR_06_YN": "비대면서명용_고객 혜택 제공을 위한 정보 이용 관련 동의",
+        "PSNINF_PAGR_07_YN": "비대면서명용_고객 혜택 정보 및 광고 수신 동의",
+        "PSNINF_PAGR_08_YN": "비대면서명용_반환금/할부금 조회 동의",
+        "PSNINF_PAGR_09_YN": "비대면서명용_T에코/New보상기변/클럽T조기기변/프리클럽반납 가입자 정보 제3자 제공 동의",
+        "PSNINF_PAGR_10_YN": "비대면서명용_은행 제휴 상품 안내를 위한 정보 제공 동의",
+        "RGCUST_ADD_RCV_AGREE_YN": "비대면서명용_정보/광고 전송을 위한 개인정보 이용 및 정보/광고 수신 동의",
+        "RGCUST_CLCT_AGREE_YN": "비대면서명용_단골고객관리 서비스를 위한 개인정보 수집/이용 동의",
+        "RGCUST_SKT_AGREE_YN": "비대면서명용_단골고객관리 서비스를 위한 SK텔레콤㈜의 개인정보 제공 동의",
+        "RGCUST_USE_ACQR_AGREE_YN": "비대면서명용_정보/광고 전송을 위한 개인정보(위치정보 포함) 이용, 취급위탁, 제공 및 정보/광고 수신",
+        "SEL_AGRMT_DC_SCRB_AGREE_YN": "비대면서명용_할인반환금 확인",
+        "SPDMR_NM": "비대면서명용_복지할인 수급자",
+        "T_GLXY_CLUB_PSNINF_OFR_YN": "비대면서명용_개인정보 제3자 제공",
+        "T_GLXY_CLUB_PSNINF_PRA_YN": "비대면서명용_개인정보 수집 및 이용 동의",
+        "T_IPHON_CLUB_CMP_ATTDM_YN": "비대면서명용_분실/파손 시 보상 유의사항",
+        "T_IPHON_CLUB_CMP_YN": "비대면서명용_분실/파손 시 보상예시 (분실 시 동일기기 보상 원칙)",
+        "T_IPHON_CLUB_PSNINF_OFR_YN": "비대면서명용_개인정보 제3자 제공",
+        "T_IPHON_CLUB_PSNINF_PRA_YN": "비대면서명용_개인정보 수집 및 이용 동의",
+        "T_SIG_FIN_TRBL_INSU_YN": "비대면서명용_금융사고보상 보험",
+        "T_SIG_PSNINF_OFR_YN": "비대면서명용_개인정보 제3자 제공",
+        "TPET_PSNINF_PRA_AGREE_YN": "비대면서명용_개인정보 수집ㆍ이용에 대한 동의 (위치정보 포함)",
+        "TPET_SVC_STPL_AGREE_YN": "비대면서명용_T pet 서비스 이용약관 (위치기반서비스 포함)",
+        "MBL_PHON_SVC_ADD_INFO_YN": "비대면서명용_이동전화서비스 추가 안내여부",
+        "PSNINF_PAGR_11_YN": "비대면서명용_요금연체사실 통지를 위한 개인정보 제3자 제공 동의",
+        "PSNINF_PAGR_12_YN": "비대면서명용_SK브로드밴드 연계 개인맞춤형 혜택/정보 제공 위한 제3자 제공 및 정보/광고",
+        "PSNINF_PAGR_13_YN": "비대면서명용_SK브로드밴드 연계 고객 혜택 제공을 위한 개인정보 처리위탁 동의",
+        "CELDISC_STPL_AGREE_YN": "비대면 척척할인 이용약관에 동의",
+        "CELDISC_PSNINF_PRA_YN": "비대면  척척할인 개인정보 수집 및 이용 동의",
+        "CELDISC_PSNINF_OFR_YN": "비대면  척척할인  제3자 정보제공 동의",
+        "CELDISC_INSU_PSNINF_OFR_YN": "비대면 척척할인  제휴 보험사 상품 소개 목적의 제3자 정보제공 동의",
+        "ENCCARD_STPL_AGREE_YN": "비대면 EnClean Bonus Card 서비스 가입신청",
+        "legal_cntc_num2_skt_yn": null,
+        "legal_repve_cntc_num_2": null,
+        "eappl_op_typ_cd": "OP02A10001",
+        "eappl_op_typ_ver_num": "0001",
+        "eappl_op_typ_eff_sta_dt": "20240520"
+    },
+    "uscan_info": {
+        "ORG_ID": "testshop",
+        "USER_ID": "사용자ID",
+        "LOGIN_ID": "로그인ID",
+        "USER_NM": "사용자명"
+    }
+}</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

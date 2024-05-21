@@ -33,12 +33,15 @@ namespace EFORMWIN
                 if (e.Args[0].Equals(Session.cookieName))//cookieName(내부망
                 {
                     Session.curDomainName = Session.inDomainName;
-                    Session.cookieValue = e.Args[1];
                 }
-                if (e.Args[0].Equals(Session.cookieName))//cookieName(내부망
+                else //외부망
                 {
                     Session.curDomainName = Session.outDomainName;
                     Session.isOutDomain = true;
+                }
+                
+                if (e.Args.Length > 1)
+                {
                     Session.cookieValue = e.Args[1];
                 }
             }
