@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Security.Policy;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,11 +26,15 @@ namespace EFORMWIN
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+
         public MainWindow()
         {
             InitializeComponent();
             InitializeApplication();
+ 
+            //서버 시작
+            HttpServer hs = new HttpServer();
+            hs.Start();
         }
 
         //기본 초기화 및 외부호출 여부 확인
@@ -47,15 +52,21 @@ namespace EFORMWIN
             {
                 btnLogin.Visibility = Visibility.Hidden;
             }
+
+
         }
 
         private void btnSign_Click(object sender, RoutedEventArgs e)
         {
+            showSignWin();
+        }
 
-             SignWin signWin = new SignWin();
-             signWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-             signWin.WindowState = WindowState.Maximized;
-             signWin.Show();
+        public  void showSignWin()
+        {
+            SignWin  signWin = new SignWin();
+            signWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            signWin.WindowState = WindowState.Maximized;
+            signWin.Show();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -74,5 +85,6 @@ namespace EFORMWIN
             }
 
         }
+
     }
 }

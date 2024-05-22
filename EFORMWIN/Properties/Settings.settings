@@ -3,13 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="AddFunc" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">function cancelSign(){
+      <Value Profile="(Default)">function cancelSign2(){
 	var callback = function(){
 		var messageJson = {
 			resultCode : "R03"
 		};
 
-		 window.chrome.webview.postMessage(JSON.stringify(messageJson));
+		window.chrome.webview.postMessage(JSON.stringify(messageJson));
 	}
 
 	if(gTokenId != ''){
@@ -41,7 +41,11 @@
 		callback();
 	}
 }
-</Value>
+
+function clickSignCompletePopup2(){
+	gSignCompletePopup.close();
+	window.chrome.webview.postMessage(JSON.stringify(gSignCompleteDataPopup));
+}</Value>
     </Setting>
     <Setting Name="testJson" Type="System.String" Scope="User">
       <Value Profile="(Default)">{

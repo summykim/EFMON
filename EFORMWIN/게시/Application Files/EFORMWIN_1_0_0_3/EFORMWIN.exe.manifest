@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="EFORMWIN.exe" version="1.0.0.1" publicKeyToken="857d238f7dca5b12" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="EFORMWIN.exe" version="1.0.0.3" publicKeyToken="857d238f7dca5b12" language="neutral" processorArchitecture="msil" type="win32" />
   <application />
   <entryPoint>
     <assemblyIdentity name="EFORMWIN" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EFORMWIN.exe" size="26552">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EFORMWIN.exe" size="64952">
       <assemblyIdentity name="EFORMWIN" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>DPdhCW6GhynUDt8XNEcfzCOUnTmWajBECHMjsO8AJkc=</dsig:DigestValue>
+        <dsig:DigestValue>XOTzEjEoQMxznh59AByIWQH+sPyIJ85iuCTA3Ejr6YM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -89,13 +89,25 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="EFORMWIN.exe.config" size="1463">
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="711952">
+      <assemblyIdentity name="Newtonsoft.Json" version="13.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>4eJ697B+7t9c5xqSVfBCKBam/FhJpIPGcU4bRyBE+p0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="EFORMWIN.exe.config" size="31368">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>HKZlnLwqxTbNUT42sqXYxNETUYjcEt+TB7kuNboXlX0=</dsig:DigestValue>
+      <dsig:DigestValue>6Ku2czv4XM03aoINdERe6+B5JprQrTSD/Iv8/eOYXM0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="runtimes\win-arm64\native\WebView2Loader.dll" size="138216">
@@ -142,4 +154,4 @@
       <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
     </application>
   </compatibility>
-<publisherIdentity name="CN=KSM_HP13\summy" issuerKeyHash="b3ee8e615fae96e54cb7623fdf1fb621d1fb33cd" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>q5wlAvjH3nkFDG9kh1iKsBVFc0E7B3gGLHy+Fij8H3U=</DigestValue></Reference></SignedInfo><SignatureValue>SL0tetsZWgxSZkFKDFTIi3ZUAhwjxkKeCV+7cvB/6mw9D/4p6ePlsVGav7S6tRcg4IpchflE4WPfWabaxTOa/ToLFZgIMo8XRpP1wpKHY52O3XroQQSgXn0w9hSix1TCbMSl3UZmo+0Bwm7omtkyXR7km5mbsi5q5TEGHqt14Lw=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>x7ftM2xIRUc8oiu0jKqYBdJSyFseDPhtEdnbMev708a+KR8CrkWlGtlfpJ3ChYq1BQkadqEcFyVLhv7jvW93aUcEiutzFEnSyrzyUBc+2bKgceyED4CaXCWjfTsctImslMMynCVRDF/XUESLvblOiWzs53/gGQIO4GqwWnGJvdE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="751ffc2816be7c2c0678073b41734515b08a5887646f0c0579dec7f802259cab" Description="" Url=""><as:assemblyIdentity name="EFORMWIN.exe" version="1.0.0.1" publicKeyToken="857d238f7dca5b12" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=KSM_HP13\summy</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>wIV5bObamTT+n74fRrulzurBFeFwerMXfFQtf5/ykJg=</DigestValue></Reference></SignedInfo><SignatureValue>Ce3LHQMULEyRuqcKS3/flZroJj290jY9fhE7sUgJz23oRU4moZs3YkQ3OuFHXSJ47T2Y5m/OBBV9R7fMvW0ydr3vJ8avMfvMnKohfVVhk6CwLpV46zRXkK2N/bcwo+cm38gR+IIigouLYogg28tflsOuprjO6zhnWybwso4VofI=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>x7ftM2xIRUc8oiu0jKqYBdJSyFseDPhtEdnbMev708a+KR8CrkWlGtlfpJ3ChYq1BQkadqEcFyVLhv7jvW93aUcEiutzFEnSyrzyUBc+2bKgceyED4CaXCWjfTsctImslMMynCVRDF/XUESLvblOiWzs53/gGQIO4GqwWnGJvdE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB0TCCATqgAwIBAgIQVEqzUbjac59CSOoE/zcuqTANBgkqhkiG9w0BAQsFADAnMSUwIwYDVQQDHhwASwBTAE0AXwBIAFAAMQAzAFwAcwB1AG0AbQB5MB4XDTI0MDUxOTE1MTk1M1oXDTI1MDUxOTIxMTk1M1owJzElMCMGA1UEAx4cAEsAUwBNAF8ASABQADEAMwBcAHMAdQBtAG0AeTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAx7ftM2xIRUc8oiu0jKqYBdJSyFseDPhtEdnbMev708a+KR8CrkWlGtlfpJ3ChYq1BQkadqEcFyVLhv7jvW93aUcEiutzFEnSyrzyUBc+2bKgceyED4CaXCWjfTsctImslMMynCVRDF/XUESLvblOiWzs53/gGQIO4GqwWnGJvdECAwEAATANBgkqhkiG9w0BAQsFAAOBgQAle+nT++UpaT6y5nLo7CSBeAUi1pJKaGapZfaA4ZQZk9RDsF4ouI2d+bac5WWtJfRRVOw8LDlKDYWCAG6mAuotEFEQqfXL50S7/zm5+nu5fuKo6afDL0LITZDsom8uLLQRMBCNxXZje9T0OwiPXhkD1xgPLZTsmHkUgYvBQgiT9g==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
+<publisherIdentity name="CN=KSM_HP13\summy" issuerKeyHash="b3ee8e615fae96e54cb7623fdf1fb621d1fb33cd" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>VmivflBWYBGhh63fVYjzqbtqeDQo2YIoImw55N+Ls4Q=</DigestValue></Reference></SignedInfo><SignatureValue>sGnILpTnBWYLbAYdKmu8sy2KoT9unnfpwJK5quuYbgCA5l42DI0FvYSVj+sreZLUueSX5ewpilfjy1PZbBdtQqi69CPIt9TmvkpdSW7R/flIeZCpk8JAwBhLbJlTqkOV+FOKKxY/FnKcGTh2Z/8mvQfY1Y44vEQRlM+mmVAnKwE=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>x7ftM2xIRUc8oiu0jKqYBdJSyFseDPhtEdnbMev708a+KR8CrkWlGtlfpJ3ChYq1BQkadqEcFyVLhv7jvW93aUcEiutzFEnSyrzyUBc+2bKgceyED4CaXCWjfTsctImslMMynCVRDF/XUESLvblOiWzs53/gGQIO4GqwWnGJvdE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="84b38bdfe4396c222882d92834786abba9f38855dfad87a1116056507eaf6856" Description="" Url=""><as:assemblyIdentity name="EFORMWIN.exe" version="1.0.0.3" publicKeyToken="857d238f7dca5b12" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=KSM_HP13\summy</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>Td+lYo9apbZll3J/ZE1mvEczRZQ8VL/nDnbIr1ICOKQ=</DigestValue></Reference></SignedInfo><SignatureValue>RKdM//ug2z0yzDby2tGFNqnLMsDheogi1XOAH0nI7JzNwthWLEbbXHhxTJOU7WzAx5RhtX+WBB791Fgqs5mZNTrMespNKwIulSK5gDOvb3WFLLYPHVC27XMCKxHeyPFHZ0b9F4N8EMEVhInJp/Lb/9sDrkANOaFedewoPQRdFac=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>x7ftM2xIRUc8oiu0jKqYBdJSyFseDPhtEdnbMev708a+KR8CrkWlGtlfpJ3ChYq1BQkadqEcFyVLhv7jvW93aUcEiutzFEnSyrzyUBc+2bKgceyED4CaXCWjfTsctImslMMynCVRDF/XUESLvblOiWzs53/gGQIO4GqwWnGJvdE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB0TCCATqgAwIBAgIQVEqzUbjac59CSOoE/zcuqTANBgkqhkiG9w0BAQsFADAnMSUwIwYDVQQDHhwASwBTAE0AXwBIAFAAMQAzAFwAcwB1AG0AbQB5MB4XDTI0MDUxOTE1MTk1M1oXDTI1MDUxOTIxMTk1M1owJzElMCMGA1UEAx4cAEsAUwBNAF8ASABQADEAMwBcAHMAdQBtAG0AeTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAx7ftM2xIRUc8oiu0jKqYBdJSyFseDPhtEdnbMev708a+KR8CrkWlGtlfpJ3ChYq1BQkadqEcFyVLhv7jvW93aUcEiutzFEnSyrzyUBc+2bKgceyED4CaXCWjfTsctImslMMynCVRDF/XUESLvblOiWzs53/gGQIO4GqwWnGJvdECAwEAATANBgkqhkiG9w0BAQsFAAOBgQAle+nT++UpaT6y5nLo7CSBeAUi1pJKaGapZfaA4ZQZk9RDsF4ouI2d+bac5WWtJfRRVOw8LDlKDYWCAG6mAuotEFEQqfXL50S7/zm5+nu5fuKo6afDL0LITZDsom8uLLQRMBCNxXZje9T0OwiPXhkD1xgPLZTsmHkUgYvBQgiT9g==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

@@ -25,13 +25,13 @@ namespace EFORMWIN.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"function cancelSign(){
+        [global::System.Configuration.DefaultSettingValueAttribute(@"function cancelSign2(){
 	var callback = function(){
 		var messageJson = {
 			resultCode : ""R03""
 		};
 
-		 window.chrome.webview.postMessage(JSON.stringify(messageJson));
+		window.chrome.webview.postMessage(JSON.stringify(messageJson));
 	}
 
 	if(gTokenId != ''){
@@ -63,7 +63,11 @@ namespace EFORMWIN.Properties {
 		callback();
 	}
 }
-")]
+
+function clickSignCompletePopup2(){
+	gSignCompletePopup.close();
+	window.chrome.webview.postMessage(JSON.stringify(gSignCompleteDataPopup));
+}")]
         public string AddFunc {
             get {
                 return ((string)(this["AddFunc"]));

@@ -8,18 +8,15 @@
         Title="서식지 서명" Height="800" Width="1024">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0"
        Background="Gray">
             <DockPanel>
-                <Button x:Name="btnSign"  DockPanel.Dock="Left" Margin="10,0,10,0"
-                   Content="서명하기"
-                   Click="btnSign_Click"  Height="30" Width="110"  />
                 <Button x:Name="btnLogin"  DockPanel.Dock="Left" Margin="10,0,10,0"
                    Content="로그인"
-                   Click="btnLogin_Click"  Height="30" Width="110" HorizontalAlignment="Left"  />
+                   Click="btnLogin_Click"  Height="15" Width="110" HorizontalAlignment="Left"  />
             </DockPanel>
         </Grid>
         <Grid Grid.Row="1">

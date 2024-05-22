@@ -27,9 +27,9 @@ namespace EFORMWIN.view
     /// <summary>
     /// SignWin.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class SignWin : Window
+    public partial class SignWin   
     {
-       
+
         public SignWin()
         {
             InitializeComponent();
@@ -119,14 +119,15 @@ namespace EFORMWIN.view
 
         private void ButTest_Click(object sender, RoutedEventArgs e)
         {
-            eformPreView();
+            string testJson = Properties.Settings.Default.testJson;
+            eformPreView(testJson);
         }
 
-        private async void eformPreView()
+        public async void eformPreView(string testJson)
         {
            // string jsscript = "document.getElementById('jsonData').value";
            // string testJson = await SignPage.signPage1.webView.ExecuteScriptAsync(jsscript);
-            string testJson = Properties.Settings.Default.testJson;
+            
             testJson = Regex.Replace(testJson, @"/\/\*(.*?)\*\//g", "");
             Console.WriteLine(testJson);
             Console.WriteLine(JObject.Parse(testJson));

@@ -1,5 +1,6 @@
 ﻿using EFORMWIN.data;
 using Microsoft.Web.WebView2.Core;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Policy;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,6 +21,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using System.Xml.Linq;
 
 namespace EFORMWIN.view
 {
@@ -27,7 +31,8 @@ namespace EFORMWIN.view
     /// </summary>
     public partial class SignPage : Page
     {
-        internal static EFORMWIN.view.SignPage signPage1;
+        public static EFORMWIN.view.SignPage signPage1;
+
         public SignPage()
         {
             InitializeComponent();
@@ -36,27 +41,31 @@ namespace EFORMWIN.view
             webView.NavigationCompleted += WebView_NavigationCompleted;
 
             initializeAsync();
+            init();
 
             signPage1 = this;
 
-
         }
+
 
         private async void WebView_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
         {
-
-            var cookies = await webView.CoreWebView2
-            .CookieManager
-            .GetCookiesAsync("https://sktelecom.com");
-
-            foreach(CoreWebView2Cookie cookie in cookies)
+            if (!Session.isLoginSuccess)
             {
-                if (cookie.Name.Equals(Session.cookieName) && cookie.Expires>= DateTime.Now)
-                {//세션이 존재하면 
-                    Session.isLoginSuccess = true;
-                    break ;
+                var cookies = await webView.CoreWebView2
+                .CookieManager
+                .GetCookiesAsync("https://sktelecom.com");
+
+                foreach (CoreWebView2Cookie cookie in cookies)
+                {
+                    if (cookie.Name.Equals(Session.cookieName) && cookie.Expires >= DateTime.Now)
+                    {//세션이 존재하면 
+                        Session.isLoginSuccess = true;
+                        break;
+                    }
                 }
             }
+
            
         }
         void EnsureHttps(object sender, CoreWebView2NavigationStartingEventArgs args)
@@ -66,6 +75,7 @@ namespace EFORMWIN.view
             {
                 args.Cancel = true;
             }
+
         }
 
   
@@ -88,9 +98,9 @@ namespace EFORMWIN.view
             }
 
 
-            string eformTestSignUrl = Session.curDomainName + Session.eformTestSignUrl;
-            Console.WriteLine(eformTestSignUrl);
-            Uri eformSignURI = new Uri(eformTestSignUrl);
+            string eformSignUrl = Session.curDomainName + Session.eformSignUrl;
+            Console.WriteLine(eformSignUrl);
+            Uri eformSignURI = new Uri(eformSignUrl);
             
             webView.Source=eformSignURI;
 
@@ -98,7 +108,8 @@ namespace EFORMWIN.view
 
 
 
-              private void navigateWebview(string url, string postDataString)
+        //POST 방식 요청시
+        private void navigateWebview(string url, string postDataString)
         {
 
             UTF8Encoding utfEncoding = new UTF8Encoding();
@@ -115,6 +126,109 @@ namespace EFORMWIN.view
                 "Content-Type: application/x-www-form-urlencoded\r\n");
             webView.CoreWebView2.NavigateWithWebResourceRequest(webResourceRequest);
         }
-     
+
+
+
+        private void init()
+        {
+            webView.CoreWebView2InitializationCompleted += CoreWebView2InitializationCompleted;
+            webView.EnsureCoreWebView2Async();
+        }
+
+        private void CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
+        {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+            if (e.IsSuccess)
+            {
+                webView.CoreWebView2.NavigationStarting += CoreWebView2_NavigationStarting;
+                webView.CoreWebView2.SourceChanged += CoreWebView2_SourceChanged;
+                webView.CoreWebView2.ContentLoading += CoreWebView2_ContentLoading;
+                webView.CoreWebView2.HistoryChanged += CoreWebView2_HistoryChanged;
+                webView.CoreWebView2.DOMContentLoaded += CoreWebView2_DOMContentLoaded;
+                webView.CoreWebView2.NavigationCompleted += CoreWebView2_NavigationCompleted;
+                webView.CoreWebView2.WebMessageReceived += CoreWebView2_WebMessageReceived;
+
+                Uri eformSignURI = new Uri(Session.curDomainName + Session.eformSignUrl);
+                webView.Source = eformSignURI;
+
+                //webView.CoreWebView2.Navigate(Session.curDomainName + Session.eformSignUrl);
+
+ 
+            }
+        }
+
+        public async void eformPreView(string testJson)
+        {
+            // string jsscript = "document.getElementById('jsonData').value";
+            // string testJson = await SignPage.signPage1.webView.ExecuteScriptAsync(jsscript);
+
+            testJson = Regex.Replace(testJson, @"/\/\*(.*?)\*\//g", "");
+            Console.WriteLine(testJson);
+            Console.WriteLine(JObject.Parse(testJson));
+
+            JObject data = new JObject(
+                  new JProperty("message", "start"),
+                  new JProperty("data", JObject.Parse(testJson))
+                );
+            JObject message = new JObject(
+              new JProperty("data", data.ToString())
+            );
+            //webView.CoreWebView2.PostWebMessageAsJson(message.ToString());
+
+
+
+            var jsFunction = @"receivePostMessage(" + message.ToString() + ")";
+            var ret = await webView.CoreWebView2.ExecuteScriptAsync(jsFunction);
+        }
+
+
+        private async void CoreWebView2_WebMessageReceived(object sender, CoreWebView2WebMessageReceivedEventArgs e)
+        {
+            Console.WriteLine(e.WebMessageAsJson);
+            HttpServer.resultString= e.WebMessageAsJson;    
+        }
+        private void CoreWebView2_NavigationStarting(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs e)
+        {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+        }
+
+        private void CoreWebView2_SourceChanged(object sender, Microsoft.Web.WebView2.Core.CoreWebView2SourceChangedEventArgs e)
+        {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+        }
+
+        private void CoreWebView2_ContentLoading(object sender, Microsoft.Web.WebView2.Core.CoreWebView2ContentLoadingEventArgs e)
+        {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+        }
+
+        private void CoreWebView2_HistoryChanged(object sender, object e)
+        {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+        }
+
+        private void CoreWebView2_DOMContentLoaded(object sender, Microsoft.Web.WebView2.Core.CoreWebView2DOMContentLoadedEventArgs e)
+        {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            string script = Properties.Settings.Default.AddFunc;
+            webView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(script);
+
+            var jsscript = "document.getElementById('btnCancel').setAttribute('onClick','cancelSign2()');";// 취소버튼
+
+            //완료버튼
+            jsscript +=  "document.evaluate('//*[@id=\"signCompletePopup\"]/div[2]/div[2]/a', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.setAttribute('onClick','clickSignCompletePopup2()')";
+            webView.CoreWebView2.ExecuteScriptAsync(jsscript);
+
+            webView.CoreWebView2.OpenDevToolsWindow();
+        }
+
+        private async void CoreWebView2_NavigationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e)
+        {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+        }
+
+
     }
 }
