@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using EFORMWIN.data;
@@ -15,7 +17,36 @@ namespace EFORMWIN
     public partial class App : Application
     {
 
- 
+        Mutex mutex = null;
+        public App()
+        {
+            // 어플리케이션 이름 확인
+            string applicationName = Process.GetCurrentProcess().ProcessName;
+            Duplicate_execution(applicationName);
+
+        }
+        /// <summary>
+        /// 중복실행방지
+        /// </summary>
+        /// <param name="mutexName"></param>
+        private void Duplicate_execution(string mutexName)
+        {
+            try
+            {
+                mutex = new Mutex(false, mutexName); // 뮤텍스 설정
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Application.Current.Shutdown(); // 프로그램 종료
+            }
+
+            if (!mutex.WaitOne(0, false)) // 프로그램 실행 중
+            {
+                MessageBox.Show("Application Already Started");
+                Application.Current.Shutdown();  // 프로그램 종료
+            }
+        }
         protected override void OnStartup(StartupEventArgs e)
         {
 

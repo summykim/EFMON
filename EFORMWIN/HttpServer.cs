@@ -52,8 +52,8 @@ namespace EFORMWIN
                 // do something with the request
                 Console.WriteLine($"{request.HttpMethod} {request.Url}");
                     JObject reqJson =null;
-                    if (request.HasEntityBody)
-                    {
+                   // if (request.HasEntityBody)
+                   // {
                         var body = request.InputStream;
                         var encoding = request.ContentEncoding;
                         var reader = new StreamReader(body, encoding);
@@ -68,15 +68,26 @@ namespace EFORMWIN
                         Console.WriteLine(jsonString);
                         Console.WriteLine("End of data:");
 
-                         //reqJson = JObject.Parse(jsonString);
+                    //reqJson = JObject.Parse(jsonString);
 
-                        //수신데이터표시
-                        if (request.Url.AbsolutePath.Equals("/sign_request"))
+                    // 초기화면 접속
+                     if (request.Url.AbsolutePath.Equals("/sign_start"))
+                    {
+                        App.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action((ThisDelegate)delegate
+                        {
+                            SignPage.signPage1.LoadEForm();
+                        }));
+
+                    }
+                    else if (request.Url.AbsolutePath.Equals("/sign_request"))
                         {
                             App.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action((ThisDelegate)delegate
                             {
-                                SignPage.signPage1.Visibility = Visibility.Visible; 
-                                SignPage.signPage1.eformPreView(jsonString);
+                                 //서명 화면 표시
+                                 SignPage.signPage1.Visibility=Visibility.Visible;
+                                 SignPage.signPage1.eformPreView(jsonString);//서명 미리보기 호출
+                                MainWindow.mainWin.WindowState = WindowState.Maximized;
+                                MainWindow.mainWin.Activate();  
                             }));
                        
                         
@@ -86,11 +97,12 @@ namespace EFORMWIN
                             if(HttpServer.resultString != null && HttpServer.resultString.Length > 0)
                             {
                                  resultString=HttpServer.resultString;
+                                  HttpServer.resultString = "";
                             }                          
                         }
                         reader.Close();
                         body.Close();
-                    }
+                    //}
                     Receive();
 
 
@@ -108,11 +120,6 @@ namespace EFORMWIN
                 }
 
         }
-        private void eformPreView(string  jsonString)
-        {
-            SignPage.signPage1.eformPreView(jsonString);
-        }
-
 
     }
 }

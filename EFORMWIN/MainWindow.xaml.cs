@@ -26,11 +26,13 @@ namespace EFORMWIN
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        public static MainWindow mainWin;
         public MainWindow()
         {
             InitializeComponent();
             InitializeApplication();
+
+            mainWin = this;
  
             //서버 시작
             HttpServer hs = new HttpServer();
@@ -43,48 +45,8 @@ namespace EFORMWIN
             this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             this.WindowState = WindowState.Maximized;
 
-            //외부망인경우
-            if (Session.isOutDomain)
-            {
-                btnLogin.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                btnLogin.Visibility = Visibility.Hidden;
-            }
+      }
 
-
-        }
-
-        private void btnSign_Click(object sender, RoutedEventArgs e)
-        {
-            showSignWin();
-        }
-
-        public  void showSignWin()
-        {
-            SignWin  signWin = new SignWin();
-            signWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            signWin.WindowState = WindowState.Maximized;
-            signWin.Show();
-        }
-
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-            LoginWin lw = new LoginWin();
-            lw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            lw.WindowState = WindowState.Maximized;
-
-            if (lw.ShowDialog()==true)
-            {
-                Console.WriteLine("true");
-            }
-            else
-            {
-                SignPage.signPage1.webView.CoreWebView2.Reload();
-            }
-
-        }
 
     }
 }

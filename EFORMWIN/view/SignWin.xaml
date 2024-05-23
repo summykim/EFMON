@@ -9,7 +9,6 @@
         Title="SignWin" Height="450" Width="800" >
     <Grid>
         <DockPanel>
-            <Button  Content="테스트" Name="ButTest" Click="ButTest_Click"></Button>
             <wv2:WebView2 Name="webView"   Source="https://e-form.sktelecom.com:8010"  />
         </DockPanel>
     </Grid>
