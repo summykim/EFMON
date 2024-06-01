@@ -42,7 +42,7 @@ namespace EFORMWIN
             //프로그램  아규먼트 확인
             if (e.Args.Length > 0)
             {
-                System.Windows.MessageBox.Show(e.Args[0]);
+                //System.Windows.MessageBox.Show(e.Args[0]);
 
                 if (e.Args[0].StartsWith("eformwin") )
                 {
