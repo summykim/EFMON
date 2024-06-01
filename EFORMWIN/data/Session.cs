@@ -26,6 +26,8 @@ namespace EFORMWIN.data
         public static string cookieValue { get;set;}
         public static string cookieDomain { get;set;}
 
+ 
+
         public static async void LoginCheckAsync(Microsoft.Web.WebView2.Wpf.WebView2  webView)
         {
             isLoginSuccess = Session.isLoginSuccess;

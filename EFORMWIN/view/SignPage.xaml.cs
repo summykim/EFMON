@@ -73,7 +73,7 @@ namespace EFORMWIN.view
             var ret = await webView.CoreWebView2.ExecuteScriptAsync(jsFunction);
         }
 
-
+        
         //서명하기  화면 열기
         private async void initializeAsync()
         {
@@ -85,20 +85,24 @@ namespace EFORMWIN.view
             //쿠키 설정
             if(Session.cookieValue!=null && Session.cookieValue.Length > 0)
             {
+                webView.CoreWebView2.CookieManager.DeleteAllCookies();  
+
                 var cookie = webView.CoreWebView2
                 .CookieManager
-                .CreateCookie("SSOSESSION", Session.cookieValue, ".sktelecom.com", "/");
+                .CreateCookie(Session.cookieName, Session.cookieValue, Session.cookieDomain, "/");
                 cookie.IsHttpOnly = true;
                 cookie.IsSecure = true;
                 webView.CoreWebView2.CookieManager.AddOrUpdateCookie(cookie);
             }
-            LoadEForm();
+            LoadEForm(true);
         }
 
         // 서식지 서명 초기화면 접속
-        public async void LoadEForm()
+        public async void LoadEForm(bool isFirst)
         {
+
             string eformSignUrl = Session.curDomainName + Session.eformSignUrl;
+            if (isFirst)eformSignUrl = Session.curDomainName;
             Console.WriteLine(eformSignUrl);
             Uri eformSignURI = new Uri(eformSignUrl);
 
@@ -112,6 +116,7 @@ namespace EFORMWIN.view
             Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
             if (e.IsSuccess)
             {
+ 
                 webView.CoreWebView2.NavigationStarting += CoreWebView2_NavigationStarting;
                 webView.CoreWebView2.SourceChanged += CoreWebView2_SourceChanged;
                 webView.CoreWebView2.ContentLoading += CoreWebView2_ContentLoading;
@@ -162,7 +167,7 @@ namespace EFORMWIN.view
             {
                
             }
-            LoadEForm();
+            LoadEForm(false);
 
             //화면 숨김
             //webView.Visibility = Visibility.Collapsed;
@@ -216,7 +221,25 @@ namespace EFORMWIN.view
         {
             Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
             string sURL = webView.Source.ToString();
+            if (Session.cookieValue != null && Session.cookieValue.Length > 0)
+            {
+                //webView.CoreWebView2.CookieManager.DeleteAllCookies();
 
+                var cookie = webView.CoreWebView2
+                .CookieManager
+                .CreateCookie(Session.cookieName, Session.cookieValue, Session.cookieDomain, "/");
+                cookie.IsHttpOnly = true;
+                cookie.IsSecure = true;
+                webView.CoreWebView2.CookieManager.AddOrUpdateCookie(cookie);
+
+                Console.WriteLine(Session.cookieName + "/" + Session.cookieValue + "/" + Session.cookieDomain);
+
+                var  curCookie= await webView.CoreWebView2.CookieManager.GetCookiesAsync("https://"+Session.cookieDomain);
+                if (curCookie != null && curCookie.Count>0)
+                {
+                         Console.WriteLine(curCookie[0].Name + "/" + curCookie[0].Value + "/" + curCookie[0].Domain);
+                }
+            }
             if (!Session.isLoginSuccess) { 
 
                 if (Session.isOutDomain)//외부망인경우 처리(e-form)

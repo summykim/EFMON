@@ -75,7 +75,7 @@ namespace EFORMWIN
                     {
                         App.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action((ThisDelegate)delegate
                         {
-                            SignPage.signPage1.LoadEForm();
+                            SignPage.signPage1.LoadEForm(false);
                         }));
 
                     }
@@ -87,6 +87,7 @@ namespace EFORMWIN
                                  SignPage.signPage1.Visibility=Visibility.Visible;
                                  SignPage.signPage1.eformPreView(jsonString);//서명 미리보기 호출
                                 MainWindow.mainWin.WindowState = WindowState.Maximized;
+                                MainWindow.mainWin.Show();
                                 MainWindow.mainWin.Activate();  
                             }));
                        

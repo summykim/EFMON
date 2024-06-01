@@ -13,7 +13,7 @@ namespace ConsoleTest.classes
 {
    static class CommonUtil
 {
-
+        public const bool PKCS1_PADDING = false;
         static string EncryptWithRSA(string dataToEncrypt, string publicKey)
         {
             try
@@ -30,9 +30,8 @@ namespace ConsoleTest.classes
                     Array.Resize(ref dataBytes, 8);
                     byte[] encryptedData = rsa.Encrypt(dataBytes, false);
                    // string encryptedBase64 = Convert.ToBase64String(encryptedData);
-                    string encrypted = Encoding.UTF8.GetString(encryptedData);
-
-
+                    string encrypted = byteArrayToHex(encryptedData);
+ 
                     return encrypted;
                 }
             }
@@ -77,8 +76,10 @@ namespace ConsoleTest.classes
             string authKeyString = "EFORM_" + today;
             Console.WriteLine(authKeyString);
 
-            string  authKey= Encrypt(authKeyString);
-            Console.WriteLine(authKey);
+            //string  authKey= Encrypt(authKeyString);
+            RSACryptoServiceProvider initialProvider = new RSACryptoServiceProvider(2048);
+            string authKey = Encrypt(initialProvider, authKeyString);
+            Console.WriteLine("plaintext encrypted to: " + authKey);
 
             return authKey;
         }
@@ -92,17 +93,56 @@ namespace ConsoleTest.classes
             cspParams = new CspParameters(PROVIDER_RSA_FULL);
             cspParams.KeyContainerName = CONTAINER_NAME;
 
-            RSACryptoServiceProvider rsa1 = new RSACryptoServiceProvider(512, cspParams);
+            RSACryptoServiceProvider rsa1 = new RSACryptoServiceProvider(256, cspParams);
             string publicKey = ConfigurationManager.AppSettings.Get("rsaPubKey");
             RSAParameters rsaParameters = GetRSAParametersFromKey(publicKey);
             rsa1.ImportParameters(rsaParameters);
 
+            byte[] certBytes = Encoding.UTF8.GetBytes(publicKey);
+            X509Certificate2 cert = new X509Certificate2(certBytes);
+            RSACryptoServiceProvider publicKeyProvider =
+            (RSACryptoServiceProvider)cert.PublicKey.Key;
+
             byte[] textBytes = Encoding.UTF8.GetBytes(text);
-            byte[] encryptedOutput = rsa1.Encrypt(textBytes, RSAEncryptionPadding.Pkcs1);
-            string outputB64 = Convert.ToBase64String(encryptedOutput);
+            byte[] encryptedOutput = publicKeyProvider.Encrypt(textBytes, RSAEncryptionPadding.Pkcs1);
+            string outputB64 = byteArrayToHex(encryptedOutput);
 
             return outputB64;
         }
 
+        public static String byteArrayToHex(byte[] bytearray)
+        {
+            if (bytearray == null || bytearray.Length == 0)
+            {
+                return null;
+            }
+
+            StringBuilder sb = new StringBuilder(bytearray.Length * 2);
+            String hexNumber;
+            for (int x = 0; x < bytearray.Length; x++)
+            {
+                hexNumber = "0" + ToHex(0xff & bytearray[x]);
+                sb.Append(hexNumber.Substring(hexNumber.Length - 2));
+            }
+            return sb.ToString();
+        }
+        private static string ToHex(this int value)
+        {
+            return String.Format("0x{0:x}", value);
+        }
+
+
+        public static string Encrypt(
+            RSACryptoServiceProvider csp,
+            string plaintext
+        )
+        {
+            return byteArrayToHex(
+                csp.Encrypt(
+                    Encoding.UTF8.GetBytes(plaintext),
+                    PKCS1_PADDING
+                )
+            );
+        }
     }
 }

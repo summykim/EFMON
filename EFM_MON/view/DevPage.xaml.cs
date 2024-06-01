@@ -1,4 +1,5 @@
 ﻿using EFM_MON.classes;
+using Microsoft.Web.WebView2.Core;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -25,12 +26,22 @@ namespace EFM_MON.view
         public DevPage()
         {
             InitializeComponent();
+
+            webView.NavigationCompleted += WebView_NavigationCompleted;
+
             string devUrl = ConfigurationManager.AppSettings.Get("devUrl");
             string ip = CommonUtil.getLocalIpAddress();
             Uri devURI = new Uri(devUrl + "?ipAddr="+ip);
             Console.WriteLine(devURI.ToString());
 
             webView.Source = devURI;
+
+        }
+
+        private void WebView_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        {
+
+            Console.WriteLine(e.HttpStatusCode);
 
         }
     }

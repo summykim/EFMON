@@ -49,10 +49,11 @@ namespace EFM_MON.view
         private async void WebView_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
         {
             // Now it's safe to interact with the DOM
+            Console.WriteLine(e.HttpStatusCode);
             var id = "UK189";
             var pwd = "ops04988!@";
-            await webView.ExecuteScriptAsync($"document.getElementById('loginIdIn').value = '{id}';");
-            await webView.ExecuteScriptAsync($"document.getElementById('pwdIn').value = '{pwd}';");
+            //await webView.ExecuteScriptAsync($"document.getElementById('loginIdIn').value = '{id}';");
+            //await webView.ExecuteScriptAsync($"document.getElementById('pwdIn').value = '{pwd}';");
         }
     }
 }

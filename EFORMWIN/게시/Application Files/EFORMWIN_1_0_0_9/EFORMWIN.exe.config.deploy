@@ -461,9 +461,6 @@ function clickSignCompletePopup2(){
     }
 }</value>
       </setting>
-      <setting name="설정" serializeAs="String">
-        <value />
-      </setting>
     </EFORMWIN.Properties.Settings>
   </userSettings>
 </configuration>

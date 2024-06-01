@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="EFORMWIN.exe" version="1.0.0.9" publicKeyToken="857d238f7dca5b12" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="eform.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="EFORMWIN" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="EFORMWIN.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="LocalIntranet" Description="Default rights given to applications on the local intranet" Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- UAC 매니페스트 옵션
+             Windows 사용자 계정 컨트롤 수준을 변경하려면 
+             requestedExecutionLevel 노드를 다음 중 하나로 바꿉니다.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+            requestedExecutionLevel 요소를 지정하면 파일 및 레지스트리 가상화를 사용하지 않습니다. 
+            이전 버전과의 호환성을 위해 애플리케이션에 가상화가 필요한 경우
+            이 요소를 제거합니다.
+        -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EFORMWIN.exe" size="934328">
+      <assemblyIdentity name="EFORMWIN" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>dtDQuhUrjG2o1F4YfrUSBZLz+EZ39kB1ZrT8Obqk4Fs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Web.WebView2.Core.dll" size="551400">
+      <assemblyIdentity name="Microsoft.Web.WebView2.Core" version="1.0.2365.46" publicKeyToken="2A8AB48044D2601E" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>p7qlSMNU75Ij9P0Z0rrjPD64y5h797V3goiXOIEQdA8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Web.WebView2.WinForms.dll" size="40408">
+      <assemblyIdentity name="Microsoft.Web.WebView2.WinForms" version="1.0.2365.46" publicKeyToken="2A8AB48044D2601E" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>O/WwmQdW5bjmUC1RvCKJYtnT5Zo1jqypuo3Ie+qGwd4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Web.WebView2.Wpf.dll" size="48088">
+      <assemblyIdentity name="Microsoft.Web.WebView2.Wpf" version="1.0.2365.46" publicKeyToken="2A8AB48044D2601E" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>ug3pmZiaDMReVlBQPUdVu5/1bpInQdFyR0cUeBFlfF0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="711952">
+      <assemblyIdentity name="Newtonsoft.Json" version="13.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>4eJ697B+7t9c5xqSVfBCKBam/FhJpIPGcU4bRyBE+p0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="eform.ico" size="432254">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>4SpnqcoyvMiXUWDW8NL5cYMBagNBQxYcK/nLwOjy52Y=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="EFORMWIN.exe.config" size="31368">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>6Ku2czv4XM03aoINdERe6+B5JprQrTSD/Iv8/eOYXM0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="runtimes\win-arm64\native\WebView2Loader.dll" size="138216">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>rlH5jUI0F1jfbNhjwcI+d7LDIENLiVVEqWWI9Se+gI8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="runtimes\win-x64\native\WebView2Loader.dll" size="162392">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Xr2gtw4EhzYH/w6M7qj7KQdLFHF8KmfCCG9O5CQE7Ho=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="runtimes\win-x86\native\WebView2Loader.dll" size="116696">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>fN380ycpDV8bmX6pY2pFlbUYjIpatJWkJRutRnCaDGI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- 이 애플리케이션이 테스트되고 함께 작동하도록 설계된 Windows 버전
+           목록입니다. 해당 요소의 주석 처리를 제거하면 Windows에서
+           호환 가능성이 가장 큰 환경을 자동으로 선택합니다. -->
+      <!-- Windows Vista -->
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />-->
+      <!-- Windows 7 -->
+      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />-->
+      <!-- Windows 8 -->
+      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}" />-->
+      <!-- Windows 8.1 -->
+      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}" />-->
+      <!-- Windows 10 -->
+      <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
+    </application>
+  </compatibility>
+<publisherIdentity name="CN=KSM_HP13\summy" issuerKeyHash="b3ee8e615fae96e54cb7623fdf1fb621d1fb33cd" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>yxj9q3DQOH6U5h54RbXnUZnUaYIEwKa7GdBbEGox1MY=</DigestValue></Reference></SignedInfo><SignatureValue>pRWhOQEVR8nHOj2W25Rd4Xn7ZaV4k+qfjKBSLVFVmX7xUoGcoXQbgH+Uxvkpyb2rf3VyNRJw7p1ke2WMubNlw/gkLO/UYB/+A1s+3pkMx5vw7ZUwMhJRtLvY4oZ2JlvyYWCkF4uUAmWAkX0zsu8zIUbX/wJW5xPRcwnMivMABpQ=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>x7ftM2xIRUc8oiu0jKqYBdJSyFseDPhtEdnbMev708a+KR8CrkWlGtlfpJ3ChYq1BQkadqEcFyVLhv7jvW93aUcEiutzFEnSyrzyUBc+2bKgceyED4CaXCWjfTsctImslMMynCVRDF/XUESLvblOiWzs53/gGQIO4GqwWnGJvdE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="c6d4316a105bd019bba6c0048269d49951e7b545781ee6947e38d070abfd18cb" Description="" Url=""><as:assemblyIdentity name="EFORMWIN.exe" version="1.0.0.9" publicKeyToken="857d238f7dca5b12" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=KSM_HP13\summy</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>Gaw+6/aTgmoc5AAsU0kc9UdX+SWF4xImefN0HXjbs2k=</DigestValue></Reference></SignedInfo><SignatureValue>MWSt2cvmghCg+krzOZPvW/gUu6x9wbu52gwf4mYNRWaS4MbqOY0TcgbOSU5hgiS0gCdYsMCbOa820JkRTWBhgMokFvS6Fy1oOwR8rl9hlBkUtetXSvSjofNAAGg64zF9dmDuSt6U13UPX8SzV9qQ1XNHBIy4WeFATwCtnwMu8no=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>x7ftM2xIRUc8oiu0jKqYBdJSyFseDPhtEdnbMev708a+KR8CrkWlGtlfpJ3ChYq1BQkadqEcFyVLhv7jvW93aUcEiutzFEnSyrzyUBc+2bKgceyED4CaXCWjfTsctImslMMynCVRDF/XUESLvblOiWzs53/gGQIO4GqwWnGJvdE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB0TCCATqgAwIBAgIQVEqzUbjac59CSOoE/zcuqTANBgkqhkiG9w0BAQsFADAnMSUwIwYDVQQDHhwASwBTAE0AXwBIAFAAMQAzAFwAcwB1AG0AbQB5MB4XDTI0MDUxOTE1MTk1M1oXDTI1MDUxOTIxMTk1M1owJzElMCMGA1UEAx4cAEsAUwBNAF8ASABQADEAMwBcAHMAdQBtAG0AeTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAx7ftM2xIRUc8oiu0jKqYBdJSyFseDPhtEdnbMev708a+KR8CrkWlGtlfpJ3ChYq1BQkadqEcFyVLhv7jvW93aUcEiutzFEnSyrzyUBc+2bKgceyED4CaXCWjfTsctImslMMynCVRDF/XUESLvblOiWzs53/gGQIO4GqwWnGJvdECAwEAATANBgkqhkiG9w0BAQsFAAOBgQAle+nT++UpaT6y5nLo7CSBeAUi1pJKaGapZfaA4ZQZk9RDsF4ouI2d+bac5WWtJfRRVOw8LDlKDYWCAG6mAuotEFEQqfXL50S7/zm5+nu5fuKo6afDL0LITZDsom8uLLQRMBCNxXZje9T0OwiPXhkD1xgPLZTsmHkUgYvBQgiT9g==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
