@@ -104,7 +104,7 @@ namespace EFMSIGN
                         {
                             initSignPad();//일반서명
                         }
-                        else if ("5G".Equals(signType))
+                        else if ("5g".Equals(signType.ToLower()))
                         {
                             init5gSignPad();//5G서명
                         }
@@ -125,7 +125,7 @@ namespace EFMSIGN
                         {
                             resultString = formMain.form.result_result.Text;
                         }
-                        else if ("5G".Equals(signType))
+                        else if ("5g".Equals(signType.ToLower()))
                         {
                             resultString = formMain.form.result_result_5G.Text;
                         }
@@ -151,25 +151,11 @@ namespace EFMSIGN
         // 일반 서명 리턴 값 초기화
         private void initSignPad()
         {
-            String nsignImage = "";//이름
-            String ssignImage = "";//서명
-
-            JObject nsignJson = new JObject(
-               new JProperty("signPadId", "nsignSignPad"),
-               new JProperty("base64Img", nsignImage)
-            );
-            JObject ssignJson = new JObject(
-                    new JProperty("signPadId", "ssignSignPad"),
-                    new JProperty("base64Img", ssignImage)
-                 );
-
             JArray resultArray = new JArray();
-            //resultArray.Add(nsignJson);
-            //resultArray.Add(ssignJson);
 
             JObject returnJson = new JObject(
-                  new JProperty("resultCode", "success"),
-                  new JProperty("resultMsg", "성공"),
+                  new JProperty("sign", "true"),
+                  new JProperty("capture", "true"),
                   new JProperty("result", resultArray)
                 );
 
@@ -181,25 +167,16 @@ namespace EFMSIGN
         // 5G 서명 리턴 값 초기화
         private void init5gSignPad()
         {
-            String csignImage = "";//5G
-
-            JObject csignJson = new JObject(
-               new JProperty("signPadId", "csignSignPad"),
-               new JProperty("base64Img", csignImage)
-            );
-
-
             JArray resultArray = new JArray();
-            //resultArray.Add(csignJson);
 
 
             JObject returnJson = new JObject(
-                  new JProperty("resultCode", "success"),
-                  new JProperty("resultMsg", "성공"),
-                  new JProperty("result", resultArray)
+                    new JProperty("sign", "true"),
+                    new JProperty("capture", "true"),
+                    new JProperty("result", resultArray)
                 );
 
-            //결과 화면에 추가
+            //결과 화면에 추가(초기화)
             formMain.form.result_result_5G.Text = returnJson.ToString();
         }
 

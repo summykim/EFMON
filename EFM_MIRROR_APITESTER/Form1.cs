@@ -230,17 +230,6 @@ namespace EFM_MIRROR_APITESTER
             String nsignImage = PanelToBase64(nsignPad);//이름
             String ssignImage = PanelToBase64(ssignPad);//서명
 
-            /*
-            {
-                "resultCode":"success",
-                "resultMsg":"",
-                 "result"[
-                       { "signPadId":"nsignSignPad","base64Img":""},
-                       { "signPadId":"ssignSignPad","base64Img":""}
-                 ] 
-             }
-             */
-
             JObject nsignJson = new JObject(
                new JProperty("signPadId", "nsignSignPad"),
                new JProperty("base64Img", nsignImage)
@@ -255,8 +244,7 @@ namespace EFM_MIRROR_APITESTER
             resultArray.Add(ssignJson);
 
             JObject returnJson = new JObject(
-                  new JProperty("resultCode", "success"),
-                  new JProperty("resultMsg", "성공"),
+                  new JProperty("sign", "false"),
                   new JProperty("result", resultArray)
                 );
 
@@ -269,7 +257,17 @@ namespace EFM_MIRROR_APITESTER
         private void btnn5GsignOk_Click(object sender, EventArgs e)
         {
             String csignImage = PanelToBase64(csignPad);//5G
+            String nsignImage = PanelToBase64(nsignPad);//이름
+            String ssignImage = PanelToBase64(ssignPad);//서명
 
+            JObject nsignJson = new JObject(
+               new JProperty("signPadId", "nsignSignPad"),
+               new JProperty("base64Img", nsignImage)
+            );
+            JObject ssignJson = new JObject(
+                    new JProperty("signPadId", "ssignSignPad"),
+                    new JProperty("base64Img", ssignImage)
+                 );
             JObject csignJson = new JObject(
                new JProperty("signPadId", "csignSignPad"),
                new JProperty("base64Img", csignImage)
@@ -277,12 +275,13 @@ namespace EFM_MIRROR_APITESTER
 
 
             JArray resultArray = new JArray();
+            resultArray.Add(nsignJson);
+            resultArray.Add(ssignJson);
             resultArray.Add(csignJson);
 
 
             JObject returnJson = new JObject(
-                  new JProperty("resultCode", "success"),
-                  new JProperty("resultMsg", "성공"),
+                  new JProperty("sign", "false"),
                   new JProperty("result", resultArray)
                 );
 
