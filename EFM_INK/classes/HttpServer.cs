@@ -7,6 +7,7 @@ using System.Security;
 using System.Linq;
 using System.Configuration;
 using System.Windows.Threading;
+using System.Windows;
 
 namespace EFM_INK
 {
@@ -19,8 +20,11 @@ namespace EFM_INK
         public void Start()
         {
               String Port  = ConfigurationManager.AppSettings.Get("serverPort");
-             _listener = new HttpListener();
+              String HttpsPort = ConfigurationManager.AppSettings.Get("httpServerPort");
+            _listener = new HttpListener();
             _listener.Prefixes.Add("http://*:" + Port.ToString() + "/");
+            _listener.Prefixes.Add("https://*:" + HttpsPort.ToString() + "/");
+            _listener.AuthenticationSchemes = AuthenticationSchemes.Anonymous;
             _listener.Start();
             Receive();
         }
@@ -84,35 +88,44 @@ namespace EFM_INK
                     
                     if (request.Url.AbsolutePath.Equals("/sign_request"))
                     {
-                        req2Entity(reqJson);
-                        if ("default".Equals(requestEntity.sign_type) || "5g".Equals(requestEntity.sign_type))
+                        try
                         {
-                            initSignPad(requestEntity.sign_type);//일반서명,5G서명  초기화
-                            resultString = makeResultEntity();
-
-                            App.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action((ThisDelegate)delegate
+                            req2Entity(reqJson);
+                            if ("default".Equals(requestEntity.sign_type) || "5g".Equals(requestEntity.sign_type))
                             {
-                                if (!"5g".Equals(requestEntity.sign_type))
+                                initSignPad(requestEntity.sign_type);//일반서명,5G서명  초기화
+                                resultString = makeResultEntity("request");
+
+                                App.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action((ThisDelegate)delegate
                                 {
-                                    MainWindow.mainWin.cInkCanvas.Visibility = System.Windows.Visibility.Hidden;
-                                    MainWindow.mainWin.cDockCanvas.Visibility = System.Windows.Visibility.Hidden;
-                                    MainWindow.mainWin.cInkCanvas.Visibility=   System.Windows.Visibility.Hidden;
-                                }
-                                else
-                                {
-                                    MainWindow.mainWin.cCanvas.Visibility = System.Windows.Visibility.Visible;
-                                    MainWindow.mainWin.cDockCanvas.Visibility = System.Windows.Visibility.Visible;
-                                    MainWindow.mainWin.cInkCanvas.Visibility = System.Windows.Visibility.Visible;
-                                }
-                                   
-                                MainWindow.mainWin.WindowState = System.Windows.WindowState.Maximized;
-                                MainWindow.mainWin.Activate();
-                            }));
-                        }
-                        else
+                                    if (!"5g".Equals(requestEntity.sign_type))
+                                    {
+                                        MainWindow.mainWin.cInkCanvas.Visibility = System.Windows.Visibility.Collapsed;
+                                        MainWindow.mainWin.cDockCanvas.Visibility = System.Windows.Visibility.Collapsed;
+                                        MainWindow.mainWin.cInkCanvas.Visibility = System.Windows.Visibility.Collapsed;
+                                        MainWindow.mainWin.cTextCanvas.Visibility = System.Windows.Visibility.Collapsed;
+                                    }
+                                    else
+                                    {
+                                        MainWindow.mainWin.cCanvas.Visibility = System.Windows.Visibility.Visible;
+                                        MainWindow.mainWin.cDockCanvas.Visibility = System.Windows.Visibility.Visible;
+                                        MainWindow.mainWin.cInkCanvas.Visibility = System.Windows.Visibility.Visible;
+                                        MainWindow.mainWin.cTextCanvas.Visibility = System.Windows.Visibility.Visible;
+                                    }
+
+                                    MainWindow.mainWin.WindowState = System.Windows.WindowState.Maximized;
+                                    MainWindow.mainWin.Activate();
+                                }));
+                            }
+                            else
+                            {
+                                resultString = errorReturnJson(requestEntity.sign_type, "signType error" + requestEntity.sign_type);
+                            }
+                        }catch(Exception ex)
                         {
-                            resultString = errorReturnJson(requestEntity.sign_type, "signType error"+ requestEntity.sign_type);
+                            MessageBox.Show(ex.Message);
                         }
+ 
 
                     }
                     else if (request.Url.AbsolutePath.Equals("/sign_cancel"))
@@ -128,7 +141,7 @@ namespace EFM_INK
                     }
                     else if (request.Url.AbsolutePath.Equals("/sign_result"))
                     {
-                           resultString = makeResultEntity();
+                           resultString = makeResultEntity("response");
 
                     }
                 }
@@ -147,7 +160,7 @@ namespace EFM_INK
                 }
 
             //초기화 
-            if (resultEntity.sign.Equals("false"))//서명완료
+            if (resultEntity.sign!=null && resultEntity.sign.Equals("false"))//서명완료
             {
                 JArray resultArray = new JArray();
                 resultEntity.sign_type = "";
@@ -167,7 +180,7 @@ namespace EFM_INK
             resultEntity.sign_type = sign_type; 
             resultEntity.sign = "true";
             resultEntity.capture = "true";
-            resultEntity.result = resultArray;
+          //  resultEntity.result = resultArray;
 
         }
 
@@ -187,17 +200,27 @@ namespace EFM_INK
 
         private void req2Entity(JObject reqJson)
         {
-            requestEntity.sign_type = (String)reqJson["sign_type"];
+            if(reqJson!=null)
+                requestEntity.sign_type = (String)reqJson["sign_type"];
         }
 
         //결과 생성
-        private string  makeResultEntity()
+        private string  makeResultEntity(string curType)
         {
-            JObject returnJson = new JObject(
-              new JProperty("sign", resultEntity.sign),
-              new JProperty("capture", resultEntity.capture),
-              new JProperty("result", resultEntity.result)
-             );
+            JObject returnJson = new JObject();
+           
+            if (curType.Equals("response"))
+            {
+                returnJson.Add(new JProperty("sign", resultEntity.sign));
+                returnJson.Add(new JProperty("capture", resultEntity.capture));
+                returnJson.Add(new JProperty("result", resultEntity.result));
+            }
+            else
+            {
+                returnJson.Add(new JProperty("sign", resultEntity.sign));
+                returnJson.Add(new JProperty("capture", resultEntity.capture));
+            }
+
             return returnJson.ToString();
         }
     }

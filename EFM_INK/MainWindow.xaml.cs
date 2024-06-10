@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Management.Instrumentation;
@@ -44,51 +46,37 @@ namespace EFM_INK
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-            String csignImage = "";
-            if (resultEntity.sign_type.Equals(""))
+            try
             {
-                MessageBox.Show("서명요청이후  시도해주세요.");
+                String csignImage = "";
+                if (resultEntity.sign_type.Equals(""))
+                {
+                    MessageBox.Show("서명요청이후  시도해주세요.");
+                    erasePadAll();
+                    return;
+                }
+                
+                if (resultEntity.sign_type.Equals("5g")) csignImage = cInkCanvas.ExportBase64(1);
+
+                String nsignImage = nInkCanvas.ExportBase64(1);
+                String ssignImage = sInkCanvas.ExportBase64(1);
+
+
+
+
+
+                 resultEntity.result = makeImageArr(csignImage, nsignImage, ssignImage);
+                 resultEntity.sign = "false"; //서명완료처리
                 erasePadAll();
-                return;
+                this.WindowState = System.Windows.WindowState.Minimized;
             }
-
-            if (resultEntity.sign_type.Equals("5g")) csignImage = getBase64Image("c");
-
-            String nsignImage = getBase64Image("n");
-            String ssignImage=getBase64Image("s");
-
-            resultEntity.result= makeImageArr(csignImage, nsignImage, ssignImage);
-            resultEntity.sign = "false"; //서명완료처리
-            this.WindowState = System.Windows.WindowState.Minimized;   
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        private string getBase64Image(string canvasType)
-        {
-            InkCanvas curInkCanvas = null;
-            if (canvasType.Equals("c")){
-                curInkCanvas = cInkCanvas;
-            }
-            else if (canvasType.Equals("n")){
-                curInkCanvas = nInkCanvas;
-            }
-            else if (canvasType.Equals("s")){
-                curInkCanvas = sInkCanvas;
-            }
-
-            System.IO.Stream stream = new System.IO.MemoryStream();
-            curInkCanvas.Strokes.Save(stream);
-            byte[] myBinary = ToByteArray(stream);
-            string base64Img = Convert.ToBase64String(myBinary);
-
-            base64Img = "data:image/jpg;base64," + base64Img;
-            Console.WriteLine("canvasType==>"+ canvasType);
-            Console.WriteLine(base64Img);
-            curInkCanvas.Strokes.Erase(new Rect(0, 0, curInkCanvas.ActualWidth, curInkCanvas.ActualHeight));
-
-            return base64Img;
-        }
-
+         
         //전체 패드 초기화
         public void erasePadAll()
         {
@@ -96,15 +84,6 @@ namespace EFM_INK
             nInkCanvas.Strokes.Erase(new Rect(0, 0, nInkCanvas.ActualWidth, nInkCanvas.ActualHeight));
             sInkCanvas.Strokes.Erase(new Rect(0, 0, sInkCanvas.ActualWidth, sInkCanvas.ActualHeight));
 
-        }
-
-        private byte[] ToByteArray(Stream stream)
-        {
-            stream.Position = 0;
-            byte[] buffer = new byte[stream.Length];
-            for (int totalBytesCopied = 0; totalBytesCopied < stream.Length;)
-                totalBytesCopied += stream.Read(buffer, totalBytesCopied, Convert.ToInt32(stream.Length) - totalBytesCopied);
-            return buffer;
         }
 
         private JArray makeImageArr(String csignImage, String nsignImage, String ssignImage)
@@ -135,5 +114,6 @@ namespace EFM_INK
             return  resultArray;
         }
 
+    
     }
 }
