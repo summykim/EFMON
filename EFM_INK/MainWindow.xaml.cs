@@ -68,7 +68,6 @@ namespace EFM_INK
                  resultEntity.result = makeImageArr(csignImage, nsignImage, ssignImage);
                  resultEntity.sign = "false"; //서명완료처리
                 erasePadAll();
-                this.WindowState = System.Windows.WindowState.Minimized;
             }
             catch(Exception ex)
             {

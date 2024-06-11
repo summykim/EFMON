@@ -93,25 +93,10 @@ namespace EFM_INK
                             req2Entity(reqJson);
                             if ("default".Equals(requestEntity.sign_type) || "5g".Equals(requestEntity.sign_type))
                             {
-                                initSignPad(requestEntity.sign_type);//일반서명,5G서명  초기화
-                                resultString = makeResultEntity("request");
-
                                 App.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action((ThisDelegate)delegate
                                 {
-                                    if (!"5g".Equals(requestEntity.sign_type))
-                                    {
-                                        MainWindow.mainWin.cInkCanvas.Visibility = System.Windows.Visibility.Collapsed;
-                                        MainWindow.mainWin.cDockCanvas.Visibility = System.Windows.Visibility.Collapsed;
-                                        MainWindow.mainWin.cInkCanvas.Visibility = System.Windows.Visibility.Collapsed;
-                                        MainWindow.mainWin.cTextCanvas.Visibility = System.Windows.Visibility.Collapsed;
-                                    }
-                                    else
-                                    {
-                                        MainWindow.mainWin.cCanvas.Visibility = System.Windows.Visibility.Visible;
-                                        MainWindow.mainWin.cDockCanvas.Visibility = System.Windows.Visibility.Visible;
-                                        MainWindow.mainWin.cInkCanvas.Visibility = System.Windows.Visibility.Visible;
-                                        MainWindow.mainWin.cTextCanvas.Visibility = System.Windows.Visibility.Visible;
-                                    }
+                                    initSignPad(requestEntity.sign_type);//일반서명,5G서명  초기화
+                                    resultString = makeResultEntity("request");
 
                                     MainWindow.mainWin.WindowState = System.Windows.WindowState.Maximized;
                                     MainWindow.mainWin.Activate();
@@ -141,8 +126,11 @@ namespace EFM_INK
                     }
                     else if (request.Url.AbsolutePath.Equals("/sign_result"))
                     {
-                           resultString = makeResultEntity("response");
-
+                           
+                        App.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action((ThisDelegate)delegate
+                        {
+                            resultString = makeResultEntity("response");
+                        }));
                     }
                 }
                 catch (Exception ex)
@@ -164,10 +152,7 @@ namespace EFM_INK
             {
                 JArray resultArray = new JArray();
                 resultEntity.sign_type = "";
-                resultEntity.sign = "";
-                resultEntity.capture = "";
                 resultEntity.result = resultArray;
-
                 requestEntity.sign_type = "";
             }
 
@@ -178,10 +163,15 @@ namespace EFM_INK
         {
             JArray resultArray = new JArray();
             resultEntity.sign_type = sign_type; 
-            resultEntity.sign = "true";
-            resultEntity.capture = "true";
-          //  resultEntity.result = resultArray;
+            resultEntity.sign = getBool2String(MainWindow.mainWin.sign_enable.IsChecked);
+            resultEntity.capture = getBool2String(MainWindow.mainWin.capture_enable.IsChecked);
+        }
 
+        private string getBool2String(bool? isValue)
+        {
+            string returnVal = "false";
+            if ((bool)isValue) returnVal = "true";
+            return returnVal;
         }
 
         // 에러리턴용  Json생성
@@ -207,6 +197,8 @@ namespace EFM_INK
         //결과 생성
         private string  makeResultEntity(string curType)
         {
+            if(!resultEntity.sign.Equals(""))
+                resultEntity.capture = getBool2String(MainWindow.mainWin.capture_enable.IsChecked);
             JObject returnJson = new JObject();
            
             if (curType.Equals("response"))
