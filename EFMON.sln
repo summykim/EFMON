@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFM_INK", "EFM_INK\EFM_INK.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Painter", "Paint-Demo-WPF-master\Painter\Painter.csproj", "{CF527551-C5C4-4F61-8A1E-F083B1AEC279}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APITester", "APITester\APITester.csproj", "{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -181,6 +183,26 @@ Global
 		{CF527551-C5C4-4F61-8A1E-F083B1AEC279}.Release|x64.Build.0 = Release|Any CPU
 		{CF527551-C5C4-4F61-8A1E-F083B1AEC279}.Release|x86.ActiveCfg = Release|Any CPU
 		{CF527551-C5C4-4F61-8A1E-F083B1AEC279}.Release|x86.Build.0 = Release|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Debug|x64.Build.0 = Debug|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Debug|x86.Build.0 = Debug|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Release|ARM.Build.0 = Release|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Release|ARM64.Build.0 = Release|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Release|x64.ActiveCfg = Release|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Release|x64.Build.0 = Release|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Release|x86.ActiveCfg = Release|Any CPU
+		{BB9BE2DA-3846-4A33-89DA-4C8CBFFADF4B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -117,6 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="txtJsonData.Text" xml:space="preserve">
+    <value>{
+    "exec_typ_cd": "S",
+    "op_data": {
+        "FRGNR_YN": "",
+        "CUST_NM": "이름(법인명)",
+        "SELF_AUTH_TYP_CD": "BIRTH_DT", /* 본인확인 인증방법 (택1) */ /* BIRTH_DT|CORP_BIZ_NUM|FRGNT_RGST_PASSPORT_NUM */ /* 법정생년월일|법인/사업자등록번호|외국인등록번호/여권번호 */ 
+        "BIRTH_DT": "950101",
+        "LEGAL_REPVE_NM": "법정대리인",
+        "SVC_NUM": "이동전화번호",
+        "GATE_SELF_SIGN_CD": "비대면 본인 서명 구분 코드",
+        "GATE_LEGAL_SIGN_CD": "비대면 법정대리인 서명 구분 코드",
+        "REQR_NM": "신청인",
+        "LEGAL_REPVE_SIGN_YN": "법정대리인 서명 여부",
+        "PASSPORT_NUM": "여권번호",
+        "SPCL_AGRMT_DC_CD": "M24_AGRMT", /* 스페셜 약정 할인 */ /* M24_AGRMT|M12_AGRMT */ /* 24개월 형|12개월 형 */ 
+        "AGRMT_PRD_CD": "M12_AGRMT", /* 약정기간(체크) */ /* M12_AGRMT|M24_AGRMT */ /* 12개월 약정|24 개월 약정 */ 
+        "AGNT_BIRTH_DT": "법정생년월일",
+        "CORP_REG_NUM": "법인등록번호",
+        "BIZ_REG_NUM": "사업자등록번호",
+        "FRGNR_RGST_NUM": "외국인등록번호",
+        "AGNT_NM": "이름",
+        "AGNT_CNTC_NUM": "연락받을 전화번호",
+        "PRE_AGRMT_PRD_CD": "M12_PLUS_AGRMT", /* 약정기간 사전신청 */ /* M12_PLUS_AGRMT */ /* 12개월사전신청 */ 
+        "SEL_AGRMT_DC_SCRB_AGREE_YN": "비대면서명용_할인반환금 확인",
+        "eappl_op_typ_cd": "OP02M10006",
+        "eappl_op_typ_ver_num": "0001",
+        "eappl_op_typ_eff_sta_dt": "20240612"
+    },
+    "uscan_info": {
+        "ORG_ID": "testshop",
+        "USER_ID": "사용자ID",
+        "LOGIN_ID": "로그인ID",
+        "USER_NM": "사용자명"
+    }
+}</value>
+  </data>
   <data name="result_result_5G.Text" xml:space="preserve">
     <value>{
  "sign":"false",
