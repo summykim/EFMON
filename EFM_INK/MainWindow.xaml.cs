@@ -113,6 +113,5 @@ namespace EFM_INK
             return  resultArray;
         }
 
-    
     }
 }

@@ -97,7 +97,6 @@ namespace EFM_INK
                                 {
                                     initSignPad(requestEntity.sign_type);//일반서명,5G서명  초기화
                                     resultString = makeResultEntity("request");
-
                                     MainWindow.mainWin.WindowState = System.Windows.WindowState.Maximized;
                                     MainWindow.mainWin.Activate();
                                 }));
@@ -115,7 +114,7 @@ namespace EFM_INK
                     }
                     else if (request.Url.AbsolutePath.Equals("/sign_cancel"))
                     {
-                        resultEntity.sign = "false";
+                        resultEntity.sign = "true";
                         App.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action((ThisDelegate)delegate
                         {
                             MainWindow.mainWin.erasePadAll();
@@ -197,8 +196,8 @@ namespace EFM_INK
         //결과 생성
         private string  makeResultEntity(string curType)
         {
-            if(!resultEntity.sign.Equals(""))
-                resultEntity.capture = getBool2String(MainWindow.mainWin.capture_enable.IsChecked);
+            resultEntity.sign = getBool2String(MainWindow.mainWin.sign_enable.IsChecked);
+            resultEntity.capture = getBool2String(MainWindow.mainWin.capture_enable.IsChecked);
             JObject returnJson = new JObject();
            
             if (curType.Equals("response"))
